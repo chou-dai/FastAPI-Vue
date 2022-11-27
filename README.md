@@ -6,7 +6,7 @@
 ## 技術スタック
 | 分野 | 使用技術 |
 | ---- | ---- |
-| フロントエンド | React(Typescript), Redux |
+| フロントエンド | Vue, Redux |
 | バックエンド | Django REST Framework, MySQL |
 | Webサーバー | Nginx |
 | その他 | Docker |
