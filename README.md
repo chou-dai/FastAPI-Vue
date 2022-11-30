@@ -7,6 +7,6 @@
 | 分野 | 使用技術 |
 | ---- | ---- |
 | フロントエンド | Vue |
-| バックエンド | Django REST Framework, MySQL |
+| バックエンド | Gin, MySQL |
 | Webサーバー | Nginx |
 | その他 | Docker |
