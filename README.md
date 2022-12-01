@@ -7,6 +7,6 @@
 | 分野 | 使用技術 |
 | ---- | ---- |
 | フロントエンド | Vue |
-| バックエンド | Gin, MySQL |
+| バックエンド | Gin(Go), MySQL |
 | Webサーバー | Nginx |
 | その他 | Docker |
