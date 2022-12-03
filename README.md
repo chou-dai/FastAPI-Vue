@@ -9,4 +9,4 @@
 | フロントエンド | Vue |
 | バックエンド | Gin(Go), MySQL |
 | Webサーバー | Nginx |
-| その他 | Docker, OpenAPI |
+| その他 | Docker, OpenAPI, Linux |
