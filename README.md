@@ -6,7 +6,7 @@
 ## 技術スタック
 | 分野 | 使用技術 |
 | ---- | ---- |
-| フロントエンド | Vue |
+| フロントエンド | Vue(TypeScript) |
 | バックエンド | Gin(Go), MySQL |
 | Webサーバー | Nginx |
 | その他 | Docker, OpenAPI, Linux |
