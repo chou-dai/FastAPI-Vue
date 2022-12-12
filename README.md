@@ -9,6 +9,6 @@
 | フロントエンド | Vue(TypeScript) |
 | バックエンド | Gin(Go), MySQL |
 | Webサーバー | Nginx(reverse proxy) |
-| その他 | Docker, Linux, SSL, SMTP |
+| その他 | Docker,　Swagger, Linux, SSL, SMTP |
 
 ## 処理概要
