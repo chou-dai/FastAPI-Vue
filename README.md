@@ -10,3 +10,5 @@
 | バックエンド | Gin(Go), MySQL |
 | Webサーバー | Nginx(reverse proxy) |
 | その他 | Docker, Linux, SSL, SMTP |
+
+## 処理概要
