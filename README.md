@@ -12,4 +12,4 @@
 | その他 | Docker,　Swagger, Linux, SSL, SMTP |
 
 ## 処理概要
-OAuth2.0でメール配信
+OAuth2.0でメール配信SMTP
