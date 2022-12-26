@@ -14,7 +14,7 @@ services:
       - "3000:3000"
 
   nginx:
-    container_name: nginx-proxy
+    container_name: nginx
     build: ./nginx
     depends_on:
       - backend
