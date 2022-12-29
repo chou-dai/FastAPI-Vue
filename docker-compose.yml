@@ -12,18 +12,17 @@ services:
     container_name: frontend
     build:
       context: ./frontend
-      dockerfile: Dockerfile.dev
-    tty: true #コンテナを起動し続けるオプション
-    # stdin_open: true
+      dockerfile: ${DOCKERFILE}
     volumes:
       - ./frontend:/frontend
     ports:
       - "3000:3000"
-  # nginx:
-  #   container_name: nginx
-  #   build: ./nginx
-  #   depends_on:
-  #     - backend
-  #     - frontend
-  #   ports:
-  #     - "80:80"
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: ${DOCKERFILE}
+    depends_on:
+      - frontend
+    ports:
+      - "80:80"
