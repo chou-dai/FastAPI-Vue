@@ -1,0 +1,13 @@
+# ビルド環境
+FROM node:18.1-alpine AS BUILD-STAGE
+WORKDIR /frontend
+COPY package.json .
+RUN npm install 
+COPY . .
+RUN npm run build
+
+# テスト環境
+FROM nginx:1.17.4-alpine as TEST-STAGE
+COPY --from=BUILD-STAGE /frontend/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
