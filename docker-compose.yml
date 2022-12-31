@@ -2,6 +2,12 @@ version: "3.7"
 
 services:
 
+  db:
+    container_name: db
+    build:
+      context: ./db
+    
+
   backend:
     container_name: backend
     build:
@@ -30,5 +36,6 @@ services:
       dockerfile: ${DOCKERFILE}
     depends_on:
       - frontend
+      - backend
     ports:
       - "80:80"
