@@ -6,6 +6,8 @@ services:
     container_name: db
     build:
       context: ./db
+    ports:
+      - "3306:3306"
     
 
   backend:
