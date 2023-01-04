@@ -2,20 +2,6 @@ version: "3.7"
 
 services:
 
-  db:
-    container_name: db
-    build:
-      context: ./db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      TZ: ${TZ}
-    ports:
-      - "3306:3306"
-    
-
   backend:
     container_name: backend
     build:
@@ -36,6 +22,24 @@ services:
       - ./frontend:/frontend
     ports:
       - "3000:3000"
+
+  db:
+    container_name: database
+    platform: linux/x86_64
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    build: ./db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: ${TZ}
+    volumes:
+      - ./db/volume:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/sql:/docker-entrypoint-initdb.d
 
   nginx:
     container_name: nginx
