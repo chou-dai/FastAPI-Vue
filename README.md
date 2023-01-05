@@ -7,6 +7,6 @@
 | 分野 | 使用技術 |
 | ---- | ---- |
 | フロントエンド | Vue(TypeScript) |
-| バックエンド | Gin(Go), MySQL, golang-migrate |
-| Webサーバー | Nginx(reverse proxy) |
-| その他 | Docker, Swagger, Linux, SSL, SMTP |
+| バックエンド | Gin(Go), MySQL, golang-migrate, Gorm(ORM), Air(Hot Reload) |
+| Webサーバー | Nginx(Reverse Proxy) |
+| その他 | Docker, Linux, SSL, SMTP |

@@ -30,6 +30,7 @@ services:
       - "8080:8080"
     volumes:
       - ./backend:/backend
+      - ./.env:/backend/.env
     tty: true
     depends_on:
       - db
