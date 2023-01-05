@@ -7,6 +7,6 @@ RUN apk upgrade --update && apk --no-cache add git
 
 RUN go get -u github.com/cosmtrek/air && go build -o /go/bin/air github.com/cosmtrek/air
 
-RUN go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+RUN go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@v4.15.2
 
 CMD ["air", "-c", ".air.toml"]

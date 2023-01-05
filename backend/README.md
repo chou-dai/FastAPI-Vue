@@ -14,10 +14,10 @@ migrate create --ext {拡張子} --dir {パス} --seq {マイグレーション�
 
 ### マイグレーションファイルの実行
 ```
-migrate --database "mysql://{ユーザー名}:{パスワード}@tcp({DBのコンテナ名}:{ポート番号})/{DB名}" --path {マイグレーションフィルのパス} up
+migrate --database "mysql://{ユーザー名}:{パスワード}@tcp({DBのコンテナ名}:{ポート番号})/{DB名}" --path {マイグレーションファイルのパス} up
 ```
 
 ### マイグレーションファイルを戻す
 ```
-migrate --database "mysql://{ユーザー名}:{パスワード}@tcp({DBのコンテナ名}:{ポート番号})/{DB名}" --path {マイグレーションフィルのパス} down
+migrate --database "mysql://{ユーザー名}:{パスワード}@tcp({DBのコンテナ名}:{ポート番号})/{DB名}" --path {マイグレーションファイルのパス} down
 ```
