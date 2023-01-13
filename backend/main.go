@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 	"os"
@@ -8,12 +9,11 @@ import (
 	"github.com/gin-gonic/gin"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
 )
 
 var (
-	db  *gorm.DB
+	db  *sql.DB
 	err error
 )
 
@@ -30,38 +30,61 @@ func Init() {
 	DB_NAME := os.Getenv("MYSQL_DATABASE")
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DB_NAME
 
-	db, err = gorm.Open("mysql", CONNECT)
+	db, err = sql.Open("mysql", CONNECT)
 	if err != nil {
 		panic(err)
 	}
 }
 
 type User struct {
-	ID   uint   `json:"id"`
-	Name string `json:"name"`
+	Id       int
+	Name     string
+	Password string
 }
 
 func main() {
 	router := gin.Default()
-	Init()
 
 	api := router.Group("/api")
 	{
 		api.GET("/", func(c *gin.Context) {
-			var u []User
+			Init()
+			defer db.Close()
+			results, err := db.Query("SELECT id, name, password FROM users")
 
-			db.Find(&u)
+			if err != nil {
+				// simply print the error to the console
+				fmt.Println("Err", err.Error())
+			}
+			users := []User{}
+			for results.Next() {
+				var user User
+				results.Scan(&user.Id, &user.Name, &user.Password)
+				users = append(users, user)
+			}
 
-			c.JSON(200, u)
+			c.JSON(200, users)
 		})
 
 		api.POST("/", func(c *gin.Context) {
-			user := User{}
+			Init()
+			defer db.Close()
+
+			var user User
 			err := c.BindJSON(&user)
 			if err != nil {
 				c.String(http.StatusBadRequest, "Request is failed: "+err.Error())
 			}
-			db.Create(&user)
+			insert, err := db.Query(
+				"INSERT INTO users(name,password) VALUES (?,?)",
+				user.Name, user.Password)
+
+			// if there is an error inserting, handle it
+			if err != nil {
+				panic(err.Error())
+			}
+
+			defer insert.Close()
 
 			c.JSON(201, user)
 		})
