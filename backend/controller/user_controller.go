@@ -1,5 +1,8 @@
 package controller
 
+// ユーザーのバックエンド処理のエントリーポイント
+// バリデーション + service層へのパイプライン
+
 import (
 	exception "gin_backend/exceptions"
 	"gin_backend/model"

@@ -1,11 +1,14 @@
 package repository
 
+// ユーザーに関するDB操作
+
 import (
 	"database/sql"
 	"fmt"
 	"gin_backend/model"
 	"os"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
 

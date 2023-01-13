@@ -1,5 +1,7 @@
 package service
 
+// ユーザーに関するビジネスロジック
+
 import (
 	"gin_backend/model"
 	"gin_backend/repository"
