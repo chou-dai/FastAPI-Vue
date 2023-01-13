@@ -1,5 +1,7 @@
 package repository
 
+// ユーザーに関するDB操作
+
 import (
 	"database/sql"
 	"fmt"

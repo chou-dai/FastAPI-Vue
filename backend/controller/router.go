@@ -4,6 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+/*
+エンドポイントの設定を行います
+*/
 func Router(router *gin.Engine) {
 	api := router.Group("/api")
 	{
