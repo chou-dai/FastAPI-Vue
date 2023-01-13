@@ -8,6 +8,7 @@ import (
 	"gin_backend/model"
 	"os"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
 
