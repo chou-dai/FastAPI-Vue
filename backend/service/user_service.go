@@ -7,11 +7,11 @@ import (
 	"gin_backend/repository"
 )
 
-func GetAllUsers() []model.UserRequestModel {
+func GetAllUsers() []model.User {
 	users := repository.GetAllUsers()
 	return users
 }
 
-func CreateUser(user model.UserRequestModel) {
+func CreateUser(user model.User) {
 	repository.CreateUser(user)
 }
