@@ -20,15 +20,13 @@ import { Options, Vue } from "vue-class-component";
         msg: String,
     },
 })
+
 export default class HelloWorld extends Vue {
     public msg!: string;
     public memories: Array<Memory> = [];
-    public fetchMemoryData() {
-        memoryApi.memoriesGet()
-            .then(res => {
-                this.memories = res.data.memories
-            });
-        
+    public async fetchMemoryData() {
+        const res = await memoryApi.memoriesGet();
+        this.memories = res.data.memories;
     }
 }
 </script>

@@ -49,8 +49,8 @@ func CreateMemory(memory model.Memory) {
 	defer db.Close()
 
 	insert, err := db.Query(
-		"INSERT INTO memories(title, description, created_at, is_public) VALUES (?, ?, ?, ?)",
-		memory.Title, memory.Description, memory.CreatedAt, memory.IsPublic)
+		"INSERT INTO memories(title, description, is_public) VALUES (?, ?, ?)",
+		memory.Title, memory.Description, memory.IsPublic)
 	if err != nil {
 		panic(err.Error())
 	}
