@@ -5,7 +5,7 @@ import { Configuration } from "./configuration";
 
 const protocol = location.protocol;
 const hostname = location.hostname;
-const basePath = protocol + "//" + hostname + ":8080";
+const basePath = protocol + "//" + hostname + ":8080/api";
 
 const option = {};
 
