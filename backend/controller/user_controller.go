@@ -4,7 +4,6 @@ package controller
 // バリデーション + service層へのパイプライン
 
 import (
-	exception "gin_backend/exceptions"
 	"gin_backend/model"
 	"gin_backend/service"
 	"net/http"
@@ -12,43 +11,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-/*
-全てのユーザーを取得します
-
-	Returns
-	-------
-		status: 200
-		users: 全ユーザー
-*/
 func GetAllUsers(c *gin.Context) {
 	users := service.GetAllUsers()
 	c.JSON(http.StatusOK, users)
 }
 
-/*
-ユーザーを作成します
-
-	Parameters
-	----------
-		user: UserRequestModel
-
-	Returns
-	-------
-		status: 201
-
-	Exceptions
-	----------
-		status: 400 リクエストエラーs
-*/
 func CreateUser(c *gin.Context) {
-	var user model.UserRequestModel
+	var user model.User
 	err := c.BindJSON(&user)
-
-	// 400: バリデーションエラー
 	if err != nil {
-		exception.BadRequest(c)
+		c.Status(http.StatusBadRequest)
 	}
-
 	service.CreateUser(user)
 	c.Status(http.StatusCreated)
 }

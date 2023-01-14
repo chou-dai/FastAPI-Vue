@@ -1,0 +1,118 @@
+openapi: 3.0.2
+info:
+  title: OpenAPI
+  version: 0.0.0
+
+paths:
+  /memories:
+    get:
+      tags:
+        - memory
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryResponse'
+    post:
+      tags:
+        - memory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                description:
+                  type: string
+                createdAt:
+                  type: string
+                  format: date-time
+                isPublic:
+                  type: boolean
+              required:
+                - title
+      responses:
+        '201':
+          description: サーバーは正常に動作しています
+
+  /memories/{id}:
+    put:
+      tags:
+        - memory
+      parameters:
+        - $ref: '#/components/parameters/MemoryId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                description:
+                  type: string
+                createdAt:
+                  type: string
+                  format: date-time
+                isPublic:
+                  type: boolean
+              required:
+                - title
+      responses:
+        '204':
+          description: サーバーは正常に動作しています
+    delete:
+      tags:
+        - memory
+      parameters:
+        - $ref: '#/components/parameters/MemoryId'
+      responses:
+        '204':
+          description: サーバーは正常に動作しています
+
+components:
+  parameters:
+    MemoryId:
+      name: id
+      in: path
+      description: メモリーID
+      required: true
+      schema:
+        type: integer
+  schemas:
+    MemoryResponse:
+      type: object
+      properties:
+        memories:
+          items:
+            $ref: '#/components/schemas/Memory'
+      required:
+        - memories
+    Memory:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        isPublic:
+          type: boolean
+      required:
+        - id
+        - title
+        - description
+        - createdAt
+        - isPublic

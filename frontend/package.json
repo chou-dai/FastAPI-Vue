@@ -5,9 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "codegen": "openapi-generator generate -g typescript-axios -i ../backend/swagger.yml -o ./src/client/"
   },
   "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.2",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0"
