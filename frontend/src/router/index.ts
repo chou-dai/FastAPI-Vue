@@ -1,5 +1,5 @@
-import MyMemory from '@/pages/MyMemory.vue';
-import Timeline from '@/pages/Timeline.vue';
+import MyMemory from '@/views/MyMemory.vue';
+import Timeline from '@/views/Timeline.vue';
 import { createRouter,createWebHistory } from 'vue-router';
 
 const routes = [

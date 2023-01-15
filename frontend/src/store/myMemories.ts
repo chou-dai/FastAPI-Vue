@@ -1,0 +1,24 @@
+import { Memory, MemoryResponse } from "@/client";
+import { memoryApi } from "@/client/clientWrapper";
+import { defineStore } from "pinia";
+
+
+export const useMyMemoriesStore = defineStore("myMemories", {
+
+    state: (): MemoryResponse => ({
+        memories: []
+    }),
+
+    getters: {
+        getMyMemories(): Array<Memory> {
+            return this.memories;
+        }
+    },
+
+    actions: {
+        async fetchMyMemories() {
+            const res = await memoryApi.memoriesGet();
+            this.memories = res.data.memories;
+        }
+    }
+});
