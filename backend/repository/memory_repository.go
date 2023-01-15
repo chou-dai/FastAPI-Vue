@@ -70,8 +70,8 @@ func UpdateMemory(memory model.Memory) {
 	defer db.Close()
 
 	update, err := db.Query(
-		"UPDATE memories SET title = ?, description = ?, created_at = ?, is_public = ? WHERE id = ?",
-		memory.Title, memory.Description, memory.CreatedAt, memory.IsPublic, memory.Id)
+		"UPDATE memories SET title = ?, description = ?, is_public = ? WHERE id = ?",
+		memory.Title, memory.Description, memory.IsPublic, memory.Id)
 	if err != nil {
 		panic(err.Error())
 	}

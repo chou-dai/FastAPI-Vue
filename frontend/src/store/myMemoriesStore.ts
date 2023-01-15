@@ -9,11 +9,7 @@ export const useMyMemoriesStore = defineStore("myMemories", {
         memories: []
     }),
 
-    getters: {
-        getMyMemories(): Array<Memory> {
-            return this.memories;
-        }
-    },
+    getters: {},
 
     actions: {
         async fetchMyMemories() {

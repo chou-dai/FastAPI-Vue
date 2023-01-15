@@ -11,8 +11,6 @@ export default class Header extends Vue {}
             <router-link to="/" class="nav-link">My記録</router-link>
             <router-link to="/timeline" class="nav-link">タイムライン</router-link>
         </div>
-        <div>
-            button
-        </div>
+        <button>ログイン</button>
     </header>
 </template>

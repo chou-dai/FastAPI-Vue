@@ -12,7 +12,7 @@ import { MemoriesGetRequest } from '@/client';
     },
 })
 
-export default class MemoryModal extends Vue {
+export default class UserModal extends Vue {
     public title!: string;
     public inputState!: MemoriesGetRequest;
     public changeInputState!: () => void;
@@ -25,14 +25,14 @@ export default class MemoryModal extends Vue {
 <template>
     <div class="modal-outer">
         <div class="modal-inner">
-            <h2>{{ title }}</h2>
-            タイトル
+            <h1>{{ title }}</h1>
+            名前
             <input
                 name="title"
                 :value="inputState.title"
                 @input="changeInputState"
             />
-            説明
+            パスワード
             <input
                 name="description"
                 :value="inputState.description"
