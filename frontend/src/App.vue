@@ -1,27 +1,24 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-</template>
-
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+import Header from './components/Header.vue';
+import { useMyMemoriesStore } from '@/store/myMemoriesStore';
 
 @Options({
-  components: {
-    HelloWorld,
-  },
+    components: {
+        Header,
+    },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+    // 初回レンダリング時のバックエンドへのfetch
+    async created() {
+        await useMyMemoriesStore().fetchMyMemories();
+    }
+}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<template>
+    <Header/>
+    <main>
+        <router-view/>
+    </main>
+</template>

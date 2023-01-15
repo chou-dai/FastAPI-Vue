@@ -6,7 +6,7 @@
 ## 技術スタック
 | 分野 | 使用技術 |
 | ---- | ---- |
-| フロントエンド | Vue(TypeScript) |
+| フロントエンド | Vue(TypeScript), Vue Router, Pinia(Global Store) |
 | バックエンド | Gin(Go), Air(Hot Reload), golang-migrate |
 | データベース | MySQL |
 | Webサーバー | Nginx(Reverse Proxy) |
