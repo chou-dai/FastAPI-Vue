@@ -1,13 +1,9 @@
-<template>
-    Timeline
-</template>
-
 <script lang="ts">
 import { Vue } from 'vue-class-component';
 
 export default class Timeline extends Vue {}
-</script>
+</script>  
 
-<style>
-</style>
-  
+<template>
+    Timeline
+</template>
