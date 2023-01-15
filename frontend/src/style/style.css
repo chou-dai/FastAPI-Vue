@@ -1,0 +1,26 @@
+.accent-color {
+    background-color: #694F94;
+    color: white;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+}
+.navigation {
+    display: flex;
+}
+.nav-link {
+    padding: 0 20px;
+}
+main {
+    margin-top: 60px;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+}
