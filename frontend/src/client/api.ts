@@ -102,6 +102,25 @@ export interface MemoryResponse {
      */
     'memories': Array<Memory>;
 }
+/**
+ * 
+ * @export
+ * @interface UserRequest
+ */
+export interface UserRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserRequest
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserRequest
+     */
+    'password': string;
+}
 
 /**
  * MemoryApi - axios parameter creator
@@ -114,8 +133,8 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/memories`;
+        apiAuthMemoriesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/auth/memories`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -144,10 +163,10 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesIdDelete: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiAuthMemoriesIdDelete: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('memoriesIdDelete', 'id', id)
-            const localVarPath = `/memories/{id}`
+            assertParamExists('apiAuthMemoriesIdDelete', 'id', id)
+            const localVarPath = `/api/auth/memories/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -178,10 +197,10 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesIdPut: async (id: number, memoryRequest?: MemoryRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiAuthMemoriesIdPut: async (id: number, memoryRequest?: MemoryRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('memoriesIdPut', 'id', id)
-            const localVarPath = `/memories/{id}`
+            assertParamExists('apiAuthMemoriesIdPut', 'id', id)
+            const localVarPath = `/api/auth/memories/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -214,8 +233,8 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesPost: async (memoryRequest?: MemoryRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/memories`;
+        apiAuthMemoriesPost: async (memoryRequest?: MemoryRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/auth/memories`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -256,8 +275,8 @@ export const MemoryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async memoriesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemoryResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memoriesGet(options);
+        async apiAuthMemoriesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemoryResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthMemoriesGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -266,8 +285,8 @@ export const MemoryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async memoriesIdDelete(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memoriesIdDelete(id, options);
+        async apiAuthMemoriesIdDelete(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthMemoriesIdDelete(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -277,8 +296,8 @@ export const MemoryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async memoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memoriesIdPut(id, memoryRequest, options);
+        async apiAuthMemoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthMemoriesIdPut(id, memoryRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -287,8 +306,8 @@ export const MemoryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async memoriesPost(memoryRequest?: MemoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memoriesPost(memoryRequest, options);
+        async apiAuthMemoriesPost(memoryRequest?: MemoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthMemoriesPost(memoryRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -306,8 +325,8 @@ export const MemoryApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesGet(options?: any): AxiosPromise<MemoryResponse> {
-            return localVarFp.memoriesGet(options).then((request) => request(axios, basePath));
+        apiAuthMemoriesGet(options?: any): AxiosPromise<MemoryResponse> {
+            return localVarFp.apiAuthMemoriesGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -315,8 +334,8 @@ export const MemoryApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesIdDelete(id: number, options?: any): AxiosPromise<void> {
-            return localVarFp.memoriesIdDelete(id, options).then((request) => request(axios, basePath));
+        apiAuthMemoriesIdDelete(id: number, options?: any): AxiosPromise<void> {
+            return localVarFp.apiAuthMemoriesIdDelete(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -325,8 +344,8 @@ export const MemoryApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: any): AxiosPromise<void> {
-            return localVarFp.memoriesIdPut(id, memoryRequest, options).then((request) => request(axios, basePath));
+        apiAuthMemoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.apiAuthMemoriesIdPut(id, memoryRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -334,8 +353,8 @@ export const MemoryApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesPost(memoryRequest?: MemoryRequest, options?: any): AxiosPromise<void> {
-            return localVarFp.memoriesPost(memoryRequest, options).then((request) => request(axios, basePath));
+        apiAuthMemoriesPost(memoryRequest?: MemoryRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.apiAuthMemoriesPost(memoryRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -353,8 +372,8 @@ export class MemoryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MemoryApi
      */
-    public memoriesGet(options?: AxiosRequestConfig) {
-        return MemoryApiFp(this.configuration).memoriesGet(options).then((request) => request(this.axios, this.basePath));
+    public apiAuthMemoriesGet(options?: AxiosRequestConfig) {
+        return MemoryApiFp(this.configuration).apiAuthMemoriesGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -364,8 +383,8 @@ export class MemoryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MemoryApi
      */
-    public memoriesIdDelete(id: number, options?: AxiosRequestConfig) {
-        return MemoryApiFp(this.configuration).memoriesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    public apiAuthMemoriesIdDelete(id: number, options?: AxiosRequestConfig) {
+        return MemoryApiFp(this.configuration).apiAuthMemoriesIdDelete(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -376,8 +395,8 @@ export class MemoryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MemoryApi
      */
-    public memoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: AxiosRequestConfig) {
-        return MemoryApiFp(this.configuration).memoriesIdPut(id, memoryRequest, options).then((request) => request(this.axios, this.basePath));
+    public apiAuthMemoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: AxiosRequestConfig) {
+        return MemoryApiFp(this.configuration).apiAuthMemoriesIdPut(id, memoryRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -387,8 +406,228 @@ export class MemoryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MemoryApi
      */
-    public memoriesPost(memoryRequest?: MemoryRequest, options?: AxiosRequestConfig) {
-        return MemoryApiFp(this.configuration).memoriesPost(memoryRequest, options).then((request) => request(this.axios, this.basePath));
+    public apiAuthMemoriesPost(memoryRequest?: MemoryRequest, options?: AxiosRequestConfig) {
+        return MemoryApiFp(this.configuration).apiAuthMemoriesPost(memoryRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * UserApi - axios parameter creator
+ * @export
+ */
+export const UserApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthLogoutPost: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/auth/logout`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiLoginPost: async (userRequest?: UserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/login`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(userRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiSignupPost: async (userRequest?: UserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/signup`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(userRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * UserApi - functional programming interface
+ * @export
+ */
+export const UserApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UserApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiAuthLogoutPost(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthLogoutPost(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiLoginPost(userRequest?: UserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiLoginPost(userRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiSignupPost(userRequest?: UserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiSignupPost(userRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * UserApi - factory interface
+ * @export
+ */
+export const UserApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UserApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthLogoutPost(options?: any): AxiosPromise<void> {
+            return localVarFp.apiAuthLogoutPost(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiLoginPost(userRequest?: UserRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.apiLoginPost(userRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiSignupPost(userRequest?: UserRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.apiSignupPost(userRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * UserApi - object-oriented interface
+ * @export
+ * @class UserApi
+ * @extends {BaseAPI}
+ */
+export class UserApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public apiAuthLogoutPost(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).apiAuthLogoutPost(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UserRequest} [userRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public apiLoginPost(userRequest?: UserRequest, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).apiLoginPost(userRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UserRequest} [userRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public apiSignupPost(userRequest?: UserRequest, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).apiSignupPost(userRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

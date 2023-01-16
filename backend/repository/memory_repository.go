@@ -1,21 +1,11 @@
 package repository
 
-// メモリーに関するDB操作
-
 import (
 	"gin_backend/model"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-/*
-全てのメモリーをSELECTします。
-
-	Returns
-	-------
-	memories: []model.Memory
-		全メモリー
-*/
 func GetAllMemories() []model.Memory {
 	dbConnect()
 	defer db.Close()
@@ -36,14 +26,6 @@ func GetAllMemories() []model.Memory {
 	return memories
 }
 
-/*
-メモリーレコードをINSERTします。
-
-	Parameters
-	----------
-	memory: model.Memory
-		メモリーレコード
-*/
 func CreateMemory(memory model.Memory) {
 	dbConnect()
 	defer db.Close()
@@ -57,14 +39,6 @@ func CreateMemory(memory model.Memory) {
 	defer insert.Close()
 }
 
-/*
-メモリーレコードをUPDATEします。
-
-	Parameters
-	----------
-	memory: model.Memory
-		メモリーレコード
-*/
 func UpdateMemory(memory model.Memory) {
 	dbConnect()
 	defer db.Close()
@@ -78,14 +52,6 @@ func UpdateMemory(memory model.Memory) {
 	defer update.Close()
 }
 
-/*
-メモリーレコードをDELETEします。
-
-	Parameters
-	----------
-	memoryId: int
-		削除するメモリーのID
-*/
 func DeleteMemory(memoryId int) {
 	dbConnect()
 	defer db.Close()

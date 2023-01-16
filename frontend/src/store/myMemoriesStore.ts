@@ -13,7 +13,7 @@ export const useMyMemoriesStore = defineStore("myMemories", {
 
     actions: {
         async fetchMyMemories() {
-            const res = await memoryApi.memoriesGet();
+            const res = await memoryApi.apiAuthMemoriesGet();
             this.memories = res.data.memories;
         }
     }
