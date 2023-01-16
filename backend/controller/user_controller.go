@@ -1,27 +1,49 @@
 package controller
 
-// ユーザーのバックエンド処理のエントリーポイント
-// バリデーション + service層へのパイプライン
-
 import (
 	"gin_backend/model"
 	"gin_backend/service"
+	"gin_backend/session"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
-func GetAllUsers(c *gin.Context) {
-	users := service.GetAllUsers()
-	c.JSON(http.StatusOK, users)
+func SignUp(c *gin.Context) {
+	var user model.User
+	c.BindJSON(&user)
+	if service.IsUserExist(user) {
+		c.Status(http.StatusBadRequest)
+		return
+	}
+
+	sessionId := uuid.New()
+	user.SessionId = sessionId.String()
+	newUser := service.CreateUser(user)
+	// セッションに登録
+	session.SetLoginUserToSession(c, newUser)
+	c.Status(http.StatusOK)
+	log.Print(session.GetLoginUserFromSession(c).Name)
 }
 
-func CreateUser(c *gin.Context) {
+func Login(c *gin.Context) {
 	var user model.User
-	err := c.BindJSON(&user)
-	if err != nil {
+	c.BindJSON(&user)
+	if !service.IsUserExist(user) {
 		c.Status(http.StatusBadRequest)
+		return
 	}
-	service.CreateUser(user)
-	c.Status(http.StatusCreated)
+
+	sessionId := uuid.New()
+	updateUser := service.UpdateSessionIdByName(sessionId.String(), user.Name)
+	// セッションに登録
+	session.SetLoginUserToSession(c, updateUser)
+	c.Status(http.StatusOK)
+}
+
+func Logout(c *gin.Context) {
+	session.ClearSession(c)
+	c.Status(http.StatusOK)
 }
