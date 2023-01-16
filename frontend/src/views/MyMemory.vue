@@ -14,7 +14,6 @@ import { useOpenModalStore } from '@/store/openModalStore';
 export default class MyMemory extends Vue {
     public myMemoriesStore = useMyMemoriesStore();
     public openModalStore = useOpenModalStore();
-    public isOpenedModal: boolean = false;
     private initialInputState: MemoryRequest = {};
     public inputState = this.initialInputState;
 
@@ -34,17 +33,17 @@ export default class MyMemory extends Vue {
     }
     public async submitCreateMemory() {
         this.openModalStore.closeCreateMemoryModal()
-        await memoryApi.memoriesPost(this.inputState);
+        await memoryApi.apiAuthMemoriesPost(this.inputState);
         await this.myMemoriesStore.fetchMyMemories();
     }
     public async submitUpdateMemory() {
         this.openModalStore.closeUpdateMemoryModal()
-        await memoryApi.memoriesIdPut(this.inputState.id!, this.inputState);
+        await memoryApi.apiAuthMemoriesIdPut(this.inputState.id!, this.inputState);
         await this.myMemoriesStore.fetchMyMemories();
     }
     public async deleteMemory(memory: Memory) {
         if(confirm(memory.title+"を本当に削除しますか？")) {
-            await memoryApi.memoriesIdDelete(memory.id);
+            await memoryApi.apiAuthMemoriesIdDelete(memory.id);
             await this.myMemoriesStore.fetchMyMemories();
         }
     }

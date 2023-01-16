@@ -4,7 +4,38 @@ info:
   version: 0.0.0
 
 paths:
-  /memories:
+  /api/signup:
+    post:
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
+  /api/login:
+    post:
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
+  /api/auth/logout:
+    post:
+      tags:
+        - user
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
+  /api/auth/memories:
     get:
       tags:
         - memory
@@ -27,7 +58,7 @@ paths:
         '201':
           description: サーバーは正常に動作しています
 
-  /memories/{id}:
+  /api/auth/memories/{id}:
     put:
       tags:
         - memory
@@ -60,6 +91,16 @@ components:
       schema:
         type: integer
   schemas:
+    UserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+      required:
+        - name
+        - password
     MemoryRequest:
       type: object
       properties:

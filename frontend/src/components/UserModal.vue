@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { MemoriesGetRequest } from '@/client';
+import { UserRequest } from '@/client';
 
 @Options({
     props: {
@@ -14,7 +14,7 @@ import { MemoriesGetRequest } from '@/client';
 
 export default class UserModal extends Vue {
     public title!: string;
-    public inputState!: MemoriesGetRequest;
+    public inputState!: UserRequest;
     public changeInputState!: () => void;
     public onClose!: () => void;
     public onSubmit!: () => void;
@@ -28,14 +28,14 @@ export default class UserModal extends Vue {
             <h1>{{ title }}</h1>
             名前
             <input
-                name="title"
-                :value="inputState.title"
+                name="name"
+                :value="inputState.name"
                 @input="changeInputState"
             />
             パスワード
             <input
-                name="description"
-                :value="inputState.description"
+                name="password"
+                :value="inputState.password"
                 @input="changeInputState"
             />
             <div>

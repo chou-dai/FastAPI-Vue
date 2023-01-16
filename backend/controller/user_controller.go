@@ -44,6 +44,7 @@ func Login(c *gin.Context) {
 }
 
 func Logout(c *gin.Context) {
+	// セッションをクリア
 	session.ClearSession(c)
 	c.Status(http.StatusOK)
 }
