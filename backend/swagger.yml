@@ -22,21 +22,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                title:
-                  type: string
-                description:
-                  type: string
-                createdAt:
-                  type: string
-                  format: date-time
-                isPublic:
-                  type: boolean
-              required:
-                - title
+              $ref: '#/components/schemas/MemoryRequest'
       responses:
         '201':
           description: サーバーは正常に動作しています
@@ -51,21 +37,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                title:
-                  type: string
-                description:
-                  type: string
-                createdAt:
-                  type: string
-                  format: date-time
-                isPublic:
-                  type: boolean
-              required:
-                - title
+              $ref: '#/components/schemas/MemoryRequest'
       responses:
         '204':
           description: サーバーは正常に動作しています
@@ -88,6 +60,17 @@ components:
       schema:
         type: integer
   schemas:
+    MemoryRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        isPublic:
+          type: boolean
     MemoryResponse:
       type: object
       properties:

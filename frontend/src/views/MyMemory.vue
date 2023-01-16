@@ -2,7 +2,7 @@
 import { Options, Vue } from 'vue-class-component';
 import { useMyMemoriesStore } from '@/store/myMemoriesStore';
 import MemoryModal from "../components/MemoryModal.vue";
-import { MemoriesGetRequest, Memory } from '@/client';
+import { MemoryRequest, Memory } from '@/client';
 import { memoryApi } from '@/client/clientWrapper';
 import { useOpenModalStore } from '@/store/openModalStore';
 
@@ -15,7 +15,7 @@ export default class MyMemory extends Vue {
     public myMemoriesStore = useMyMemoriesStore();
     public openModalStore = useOpenModalStore();
     public isOpenedModal: boolean = false;
-    private initialInputState: MemoriesGetRequest = {title: ""};
+    private initialInputState: MemoryRequest = {};
     public inputState = this.initialInputState;
 
     public changeInputState(e: any) {

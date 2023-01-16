@@ -9,7 +9,7 @@ import { useMyMemoriesStore } from '@/store/myMemoriesStore';
     },
 })
 export default class App extends Vue {
-    // 初回レンダリング時のバックエンドへのfetch
+    // 初回レンダリング時のバックエンドfetch
     async created() {
         await useMyMemoriesStore().fetchMyMemories();
     }

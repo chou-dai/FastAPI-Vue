@@ -14,7 +14,7 @@ func main() {
 	// Corsの設定
 	middleware.Cors(router)
 
-	// routerをcontrollerに渡してルーティング
+	// ルーティング
 	controller.Router(router)
 
 	// ポートの設定
