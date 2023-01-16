@@ -24,7 +24,7 @@ export default class MyMemory extends Vue {
             [e.target.name]: e.target.value
         }
     }
-    public openCreatedModal() {
+    public openCreateModal() {
         this.openModalStore.openCreateMemoryModal();
         this.inputState = this.initialInputState;
     }
@@ -53,7 +53,7 @@ export default class MyMemory extends Vue {
 
 <template>
     <div class="container">
-        <button @click="openCreatedModal">作成</button>
+        <button @click="openCreateModal">新規作成</button>
         <div v-for="memory in myMemoriesStore.memories" :key="memory.id">
             <div>●:{{ memory.title }}</div>
             <div>○:{{ memory.description }}</div>
