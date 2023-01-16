@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { MemoriesGetRequest } from '@/client';
+import { MemoryRequest } from '@/client';
 
 @Options({
     props: {
@@ -14,7 +14,7 @@ import { MemoriesGetRequest } from '@/client';
 
 export default class MemoryModal extends Vue {
     public title!: string;
-    public inputState!: MemoriesGetRequest;
+    public inputState!: MemoryRequest;
     public changeInputState!: () => void;
     public onClose!: () => void;
     public onSubmit!: () => void;

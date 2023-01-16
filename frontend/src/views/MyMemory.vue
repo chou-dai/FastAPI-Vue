@@ -2,7 +2,7 @@
 import { Options, Vue } from 'vue-class-component';
 import { useMyMemoriesStore } from '@/store/myMemoriesStore';
 import MemoryModal from "../components/MemoryModal.vue";
-import { MemoriesGetRequest, Memory } from '@/client';
+import { MemoryRequest, Memory } from '@/client';
 import { memoryApi } from '@/client/clientWrapper';
 import { useOpenModalStore } from '@/store/openModalStore';
 
@@ -15,7 +15,7 @@ export default class MyMemory extends Vue {
     public myMemoriesStore = useMyMemoriesStore();
     public openModalStore = useOpenModalStore();
     public isOpenedModal: boolean = false;
-    private initialInputState: MemoriesGetRequest = {title: ""};
+    private initialInputState: MemoryRequest = {};
     public inputState = this.initialInputState;
 
     public changeInputState(e: any) {
@@ -24,7 +24,7 @@ export default class MyMemory extends Vue {
             [e.target.name]: e.target.value
         }
     }
-    public openCreatedModal() {
+    public openCreateModal() {
         this.openModalStore.openCreateMemoryModal();
         this.inputState = this.initialInputState;
     }
@@ -53,7 +53,7 @@ export default class MyMemory extends Vue {
 
 <template>
     <div class="container">
-        <button @click="openCreatedModal">作成</button>
+        <button @click="openCreateModal">新規作成</button>
         <div v-for="memory in myMemoriesStore.memories" :key="memory.id">
             <div>●:{{ memory.title }}</div>
             <div>○:{{ memory.description }}</div>

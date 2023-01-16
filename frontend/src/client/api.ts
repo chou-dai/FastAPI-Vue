@@ -24,43 +24,6 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
- * @interface MemoriesGetRequest
- */
-export interface MemoriesGetRequest {
-    /**
-     * 
-     * @type {number}
-     * @memberof MemoriesGetRequest
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof MemoriesGetRequest
-     */
-    'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MemoriesGetRequest
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MemoriesGetRequest
-     */
-    'createdAt'?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof MemoriesGetRequest
-     */
-    'isPublic'?: boolean;
-}
-/**
- * 
- * @export
  * @interface Memory
  */
 export interface Memory {
@@ -94,6 +57,37 @@ export interface Memory {
      * @memberof Memory
      */
     'isPublic': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface MemoryRequest
+ */
+export interface MemoryRequest {
+    /**
+     * 
+     * @type {number}
+     * @memberof MemoryRequest
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemoryRequest
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemoryRequest
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MemoryRequest
+     */
+    'isPublic'?: boolean;
 }
 /**
  * 
@@ -180,11 +174,11 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {number} id メモリーID
-         * @param {MemoriesGetRequest} [memoriesGetRequest] 
+         * @param {MemoryRequest} [memoryRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesIdPut: async (id: number, memoriesGetRequest?: MemoriesGetRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        memoriesIdPut: async (id: number, memoryRequest?: MemoryRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('memoriesIdPut', 'id', id)
             const localVarPath = `/memories/{id}`
@@ -207,7 +201,7 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(memoriesGetRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(memoryRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -216,11 +210,11 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {MemoriesGetRequest} [memoriesGetRequest] 
+         * @param {MemoryRequest} [memoryRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesPost: async (memoriesGetRequest?: MemoriesGetRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        memoriesPost: async (memoryRequest?: MemoryRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/memories`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -240,7 +234,7 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(memoriesGetRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(memoryRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -279,22 +273,22 @@ export const MemoryApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id メモリーID
-         * @param {MemoriesGetRequest} [memoriesGetRequest] 
+         * @param {MemoryRequest} [memoryRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async memoriesIdPut(id: number, memoriesGetRequest?: MemoriesGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memoriesIdPut(id, memoriesGetRequest, options);
+        async memoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.memoriesIdPut(id, memoryRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {MemoriesGetRequest} [memoriesGetRequest] 
+         * @param {MemoryRequest} [memoryRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async memoriesPost(memoriesGetRequest?: MemoriesGetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memoriesPost(memoriesGetRequest, options);
+        async memoriesPost(memoryRequest?: MemoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.memoriesPost(memoryRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -327,21 +321,21 @@ export const MemoryApiFactory = function (configuration?: Configuration, basePat
         /**
          * 
          * @param {number} id メモリーID
-         * @param {MemoriesGetRequest} [memoriesGetRequest] 
+         * @param {MemoryRequest} [memoryRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesIdPut(id: number, memoriesGetRequest?: MemoriesGetRequest, options?: any): AxiosPromise<void> {
-            return localVarFp.memoriesIdPut(id, memoriesGetRequest, options).then((request) => request(axios, basePath));
+        memoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.memoriesIdPut(id, memoryRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {MemoriesGetRequest} [memoriesGetRequest] 
+         * @param {MemoryRequest} [memoryRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        memoriesPost(memoriesGetRequest?: MemoriesGetRequest, options?: any): AxiosPromise<void> {
-            return localVarFp.memoriesPost(memoriesGetRequest, options).then((request) => request(axios, basePath));
+        memoriesPost(memoryRequest?: MemoryRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.memoriesPost(memoryRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -377,24 +371,24 @@ export class MemoryApi extends BaseAPI {
     /**
      * 
      * @param {number} id メモリーID
-     * @param {MemoriesGetRequest} [memoriesGetRequest] 
+     * @param {MemoryRequest} [memoryRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MemoryApi
      */
-    public memoriesIdPut(id: number, memoriesGetRequest?: MemoriesGetRequest, options?: AxiosRequestConfig) {
-        return MemoryApiFp(this.configuration).memoriesIdPut(id, memoriesGetRequest, options).then((request) => request(this.axios, this.basePath));
+    public memoriesIdPut(id: number, memoryRequest?: MemoryRequest, options?: AxiosRequestConfig) {
+        return MemoryApiFp(this.configuration).memoriesIdPut(id, memoryRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {MemoriesGetRequest} [memoriesGetRequest] 
+     * @param {MemoryRequest} [memoryRequest] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MemoryApi
      */
-    public memoriesPost(memoriesGetRequest?: MemoriesGetRequest, options?: AxiosRequestConfig) {
-        return MemoryApiFp(this.configuration).memoriesPost(memoriesGetRequest, options).then((request) => request(this.axios, this.basePath));
+    public memoriesPost(memoryRequest?: MemoryRequest, options?: AxiosRequestConfig) {
+        return MemoryApiFp(this.configuration).memoriesPost(memoryRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
