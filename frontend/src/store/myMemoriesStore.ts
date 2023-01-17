@@ -1,11 +1,11 @@
-import { Memory, MemoryResponse } from "@/client";
+import { MyMemoryResponse } from "@/client";
 import { memoryApi } from "@/client/clientWrapper";
 import { defineStore } from "pinia";
 
 
 export const useMyMemoriesStore = defineStore("myMemories", {
 
-    state: (): MemoryResponse => ({
+    state: (): MyMemoryResponse => ({
         memories: []
     }),
 

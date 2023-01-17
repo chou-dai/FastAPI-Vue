@@ -9,6 +9,9 @@ import (
 func Router(router *gin.Engine) {
 	api := router.Group("/api")
 	{
+		// 認証チェック
+		api.GET("/auth", middleware.IsAuth)
+
 		// ログインしていないユーザー
 		api.POST("/signup", SignUp)
 		api.POST("/login", Login)
@@ -20,7 +23,7 @@ func Router(router *gin.Engine) {
 			auth.POST("/logout", Logout)
 			users := auth.Group("/users")
 			{
-				users.GET("")
+				users.GET("", GetMe)
 				users.PUT("")
 			}
 			memories := auth.Group("/memories")

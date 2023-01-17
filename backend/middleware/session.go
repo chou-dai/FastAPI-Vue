@@ -7,11 +7,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func IsAuth(c *gin.Context) {
+	session := sessions.Default(c)
+	sessionId := session.Get("SessionId")
+
+	if sessionId == nil {
+		c.Status(http.StatusUnauthorized)
+	} else {
+		c.Status(http.StatusOK)
+	}
+}
+
 // セッション認証
 func AuthenticateBySession() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		sessiona := sessions.Default(c)
-		sessionId := sessiona.Get("SessionId")
+		session := sessions.Default(c)
+		sessionId := session.Get("SessionId")
 
 		if sessionId == nil {
 			c.Status(http.StatusUnauthorized)

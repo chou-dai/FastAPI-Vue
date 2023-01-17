@@ -25,18 +25,21 @@ export const useOpenModalStore = defineStore("openModal", {
         closeCreateMemoryModal() {
             this.isOpenedCreateMemoryModal = false;
         },
+
         openUpdateMemoryModal() {
             this.isOpenedUpdateMemoryModal = true;
         },
         closeUpdateMemoryModal() {
             this.isOpenedUpdateMemoryModal = false;
         },
+
         openSignupModal() {
             this.isOpenedSignupModal = true;
         },
         closeSignupModal() {
             this.isOpenedSignupModal = false;
         },
+        
         openLoginModal() {
             this.isOpenedLoginModal = true;
         },

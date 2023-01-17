@@ -1,17 +1,17 @@
-import MyMemory from '@/views/MyMemory.vue';
-import Timeline from '@/views/Timeline.vue';
+import MyPage from '@/views/MyPage.vue';
+import Home from '@/views/Home.vue';
 import { createRouter,createWebHistory } from 'vue-router';
 
 const routes = [
     {
         path: "/",
-        name: "myMemory",
-        component: MyMemory
+        name: "timeline",
+        component: Home
     },
     {
-        path: "/timeline",
-        name: "timeline",
-        component: Timeline
+        path: "/mypage",
+        name: "mypage",
+        component: MyPage
     }
 ]
 

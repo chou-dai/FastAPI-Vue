@@ -8,7 +8,7 @@ type MemoryWithUserName struct {
 	Description string    `json:"description"`
 	CreatedAt   time.Time `json:"createdAt"`
 	IsPublic    bool      `json:"isPublic"`
-	UserName    int       `json:"userName"`
+	UserName    string    `json:"userName"`
 }
 
 type PublicMemoryResponse struct {

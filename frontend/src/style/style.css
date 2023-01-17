@@ -64,3 +64,6 @@ main {
     flex-direction: column;
     padding: 20px;
 }
+.el-menu--horizontal {
+    border-bottom: 0;
+}

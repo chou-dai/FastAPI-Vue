@@ -4,6 +4,13 @@ info:
   version: 0.0.0
 
 paths:
+  /api/auth:
+    get:
+      tags:
+        - auth
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
   /api/signup:
     post:
       tags:
@@ -35,6 +42,28 @@ paths:
       responses:
         '200':
           description: サーバーは正常に動作しています
+  /api/auth/users:
+    get:
+      tags:
+        - user
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginUserResponse'
+  /api/memories:
+    get:
+      tags:
+        - memory
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicMemoryResponse'
   /api/auth/memories:
     get:
       tags:
@@ -45,7 +74,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MemoryResponse'
+                $ref: '#/components/schemas/MyMemoryResponse'
     post:
       tags:
         - memory
@@ -112,15 +141,56 @@ components:
           type: string
         isPublic:
           type: boolean
-    MemoryResponse:
+    LoginUserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+        - id
+        - name
+    PublicMemoryResponse:
       type: object
       properties:
         memories:
           items:
-            $ref: '#/components/schemas/Memory'
+            $ref: '#/components/schemas/PublicMemory'
       required:
         - memories
-    Memory:
+    MyMemoryResponse:
+      type: object
+      properties:
+        memories:
+          items:
+            $ref: '#/components/schemas/MyMemory'
+      required:
+        - memories
+    PublicMemory:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        isPublic:
+          type: boolean
+        userName:
+          type: string
+      required:
+        - id
+        - title
+        - description
+        - createdAt
+        - isPublic
+        - userName
+    MyMemory:
       type: object
       properties:
         id:
