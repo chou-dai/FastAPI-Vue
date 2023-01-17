@@ -15,4 +15,5 @@ type Memory struct {
 	Description string    `json:"description"`
 	CreatedAt   time.Time `json:"createdAt"`
 	IsPublic    bool      `json:"isPublic"`
+	UserId      int       `json:"userId"`
 }

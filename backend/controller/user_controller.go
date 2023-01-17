@@ -48,3 +48,13 @@ func Logout(c *gin.Context) {
 	session.ClearSession(c)
 	c.Status(http.StatusOK)
 }
+
+func GetMe(c *gin.Context) {
+	loginUser := session.GetLoginUserFromSession(c)
+
+	var user model.LoginUserResponse
+	user.Id = loginUser.UserId
+	user.Name = loginUser.Name
+
+	c.JSON(http.StatusOK, user)
+}

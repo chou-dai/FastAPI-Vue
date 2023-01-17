@@ -34,14 +34,15 @@ export default class Header extends Vue {
     }
     public async submitSignup() {
         this.openModalStore.closeSignupModal()
-        const res = await userApi.apiSignupPost(this.inputState);
-        console.log(res.status);
+        userApi.apiSignupPost(this.inputState);
         
     }
     public async submitLogin() {
         this.openModalStore.closeLoginModal()
-        const res = await userApi.apiLoginPost(this.inputState);
-        console.log(res.status);
+        await userApi.apiLoginPost(this.inputState);
+    }
+    public async submitLogout() {
+        await userApi.apiAuthLogoutPost();
     }
 }
 </script>
@@ -56,6 +57,7 @@ export default class Header extends Vue {
         <div>
             <button @click="openLoginModal">ログイン</button>
             <button @click="openSignupModal">サインアップ</button>
+            <button @click="submitLogout">ログアウト</button>
         </div>
     </header>
     <UserModal

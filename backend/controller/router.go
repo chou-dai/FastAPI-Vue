@@ -12,23 +12,20 @@ func Router(router *gin.Engine) {
 		// ログインしていないユーザー
 		api.POST("/signup", SignUp)
 		api.POST("/login", Login)
+		api.GET("/memories", GetPublicMemories)
 
 		// ログインユーザー
 		auth := api.Group("/auth", middleware.AuthenticateBySession())
 		{
 			auth.POST("/logout", Logout)
-
 			users := auth.Group("/users")
 			{
 				users.GET("")
-				users.POST("")
 				users.PUT("")
-				users.DELETE("")
 			}
-
 			memories := auth.Group("/memories")
 			{
-				memories.GET("", GetAllMemories)
+				memories.GET("", GetMyMemories)
 				memories.POST("", CreateMemory)
 				memories.PUT("/:id", UpdateMemory)
 				memories.DELETE("/:id", DeleteMemory)
