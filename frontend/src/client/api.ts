@@ -24,39 +24,21 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
- * @interface Memory
+ * @interface LoginUserResponse
  */
-export interface Memory {
+export interface LoginUserResponse {
     /**
      * 
      * @type {number}
-     * @memberof Memory
+     * @memberof LoginUserResponse
      */
     'id': number;
     /**
      * 
      * @type {string}
-     * @memberof Memory
+     * @memberof LoginUserResponse
      */
-    'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Memory
-     */
-    'description': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Memory
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Memory
-     */
-    'isPublic': boolean;
+    'name': string;
 }
 /**
  * 
@@ -92,15 +74,108 @@ export interface MemoryRequest {
 /**
  * 
  * @export
- * @interface MemoryResponse
+ * @interface MyMemory
  */
-export interface MemoryResponse {
+export interface MyMemory {
     /**
      * 
-     * @type {Array<Memory>}
-     * @memberof MemoryResponse
+     * @type {number}
+     * @memberof MyMemory
      */
-    'memories': Array<Memory>;
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MyMemory
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MyMemory
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MyMemory
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof MyMemory
+     */
+    'isPublic': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface MyMemoryResponse
+ */
+export interface MyMemoryResponse {
+    /**
+     * 
+     * @type {Array<MyMemory>}
+     * @memberof MyMemoryResponse
+     */
+    'memories': Array<MyMemory>;
+}
+/**
+ * 
+ * @export
+ * @interface PublicMemory
+ */
+export interface PublicMemory {
+    /**
+     * 
+     * @type {number}
+     * @memberof PublicMemory
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PublicMemory
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PublicMemory
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PublicMemory
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PublicMemory
+     */
+    'isPublic': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof PublicMemory
+     */
+    'userName': string;
+}
+/**
+ * 
+ * @export
+ * @interface PublicMemoryResponse
+ */
+export interface PublicMemoryResponse {
+    /**
+     * 
+     * @type {Array<PublicMemory>}
+     * @memberof PublicMemoryResponse
+     */
+    'memories': Array<PublicMemory>;
 }
 /**
  * 
@@ -121,6 +196,100 @@ export interface UserRequest {
      */
     'password': string;
 }
+
+/**
+ * AuthApi - axios parameter creator
+ * @export
+ */
+export const AuthApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/auth`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AuthApi - functional programming interface
+ * @export
+ */
+export const AuthApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AuthApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiAuthGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * AuthApi - factory interface
+ * @export
+ */
+export const AuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AuthApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthGet(options?: any): AxiosPromise<void> {
+            return localVarFp.apiAuthGet(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AuthApi - object-oriented interface
+ * @export
+ * @class AuthApi
+ * @extends {BaseAPI}
+ */
+export class AuthApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public apiAuthGet(options?: AxiosRequestConfig) {
+        return AuthApiFp(this.configuration).apiAuthGet(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
 
 /**
  * MemoryApi - axios parameter creator
@@ -260,6 +429,35 @@ export const MemoryApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiMemoriesGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/memories`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -275,7 +473,7 @@ export const MemoryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiAuthMemoriesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemoryResponse>> {
+        async apiAuthMemoriesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MyMemoryResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthMemoriesGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -310,6 +508,15 @@ export const MemoryApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthMemoriesPost(memoryRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiMemoriesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PublicMemoryResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiMemoriesGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -325,7 +532,7 @@ export const MemoryApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiAuthMemoriesGet(options?: any): AxiosPromise<MemoryResponse> {
+        apiAuthMemoriesGet(options?: any): AxiosPromise<MyMemoryResponse> {
             return localVarFp.apiAuthMemoriesGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -355,6 +562,14 @@ export const MemoryApiFactory = function (configuration?: Configuration, basePat
          */
         apiAuthMemoriesPost(memoryRequest?: MemoryRequest, options?: any): AxiosPromise<void> {
             return localVarFp.apiAuthMemoriesPost(memoryRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiMemoriesGet(options?: any): AxiosPromise<PublicMemoryResponse> {
+            return localVarFp.apiMemoriesGet(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -409,6 +624,16 @@ export class MemoryApi extends BaseAPI {
     public apiAuthMemoriesPost(memoryRequest?: MemoryRequest, options?: AxiosRequestConfig) {
         return MemoryApiFp(this.configuration).apiAuthMemoriesPost(memoryRequest, options).then((request) => request(this.axios, this.basePath));
     }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MemoryApi
+     */
+    public apiMemoriesGet(options?: AxiosRequestConfig) {
+        return MemoryApiFp(this.configuration).apiMemoriesGet(options).then((request) => request(this.axios, this.basePath));
+    }
 }
 
 
@@ -433,6 +658,35 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             }
 
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthUsersGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/auth/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -534,6 +788,15 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiAuthUsersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginUserResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthUsersGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {UserRequest} [userRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -572,6 +835,14 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthUsersGet(options?: any): AxiosPromise<LoginUserResponse> {
+            return localVarFp.apiAuthUsersGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {UserRequest} [userRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -606,6 +877,16 @@ export class UserApi extends BaseAPI {
      */
     public apiAuthLogoutPost(options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).apiAuthLogoutPost(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public apiAuthUsersGet(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).apiAuthUsersGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

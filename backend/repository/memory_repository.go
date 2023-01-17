@@ -1,16 +1,48 @@
 package repository
 
 import (
+	"fmt"
 	"gin_backend/model"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func GetAllMemories() []model.Memory {
+func GetPublicMemories() []model.MemoryWithUserName {
 	dbConnect()
 	defer db.Close()
 
-	rows, err := db.Query("SELECT id, title, description, created_at, is_public FROM memories")
+	rows, err := db.Query(
+		`SELECT memories.id, title, description, created_at, is_public, name
+			FROM memories
+			LEFT JOIN users
+				ON memories.user_id = users.id
+			WHERE is_public = true
+			ORDER BY memories.created_at DESC`)
+	if err != nil {
+		panic(err.Error())
+	}
+	defer rows.Close()
+
+	memories := []model.MemoryWithUserName{}
+	for rows.Next() {
+		var memory model.MemoryWithUserName
+		rows.Scan(&memory.Id, &memory.Title, &memory.Description, &memory.CreatedAt, &memory.IsPublic, &memory.UserName)
+		memories = append(memories, memory)
+	}
+
+	return memories
+}
+
+func GetMyMemories(userId int) []model.Memory {
+	dbConnect()
+	defer db.Close()
+
+	query := fmt.Sprintf(
+		`SELECT id, title, description, created_at, is_public
+			FROM memories
+			WHERE user_id = %d
+			ORDER BY memories.created_at DESC`, userId)
+	rows, err := db.Query(query)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -31,8 +63,8 @@ func CreateMemory(memory model.Memory) {
 	defer db.Close()
 
 	insert, err := db.Query(
-		"INSERT INTO memories(title, description, is_public) VALUES (?, ?, ?)",
-		memory.Title, memory.Description, memory.IsPublic)
+		"INSERT INTO memories(title, description, is_public, user_id) VALUES (?, ?, ?, ?)",
+		memory.Title, memory.Description, memory.IsPublic, memory.UserId)
 	if err != nil {
 		panic(err.Error())
 	}

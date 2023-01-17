@@ -5,9 +5,14 @@ import (
 	"gin_backend/repository"
 )
 
-func GetAllMemories() model.MemoryResponse {
-	memories := repository.GetAllMemories()
-	return model.MemoryResponse{Memories: memories}
+func GetPublicMemories() model.PublicMemoryResponse {
+	memories := repository.GetPublicMemories()
+	return model.PublicMemoryResponse{Memories: memories}
+}
+
+func GetMyMemories(userId int) model.MyMemoryResponse {
+	memories := repository.GetMyMemories(userId)
+	return model.MyMemoryResponse{Memories: memories}
 }
 
 func CreateMemory(memory model.Memory) {

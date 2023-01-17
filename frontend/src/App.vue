@@ -2,6 +2,8 @@
 import { Options, Vue } from 'vue-class-component';
 import Header from './components/Header.vue';
 import { useMyMemoriesStore } from '@/store/myMemoriesStore';
+import { usePublicMemoriesStore } from './store/publicMemoriesStore';
+import { useIsAuthStore } from './store/isAuthStore';
 
 @Options({
     components: {
@@ -11,6 +13,8 @@ import { useMyMemoriesStore } from '@/store/myMemoriesStore';
 export default class App extends Vue {
     // 初回レンダリング時のバックエンドfetch
     async created() {
+        await useIsAuthStore().fetchIsAuth();
+        await usePublicMemoriesStore().fetchPublicMemories();
         await useMyMemoriesStore().fetchMyMemories();
     }
 }
