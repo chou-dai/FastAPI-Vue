@@ -19,6 +19,30 @@ func GetUserBySessionId(sessionId string) model.User {
 	return user
 }
 
+func IsUserExistBySessionId(sessionId string) bool {
+	dbConnect()
+	defer db.Close()
+
+	var count int
+	err := db.QueryRow("SELECT Count(*) FROM users WHERE session_id = ?", sessionId).Scan(&count)
+	if err != nil {
+		panic(err.Error())
+	}
+	return count != 0
+}
+
+func IsUserExistByName(name string) bool {
+	dbConnect()
+	defer db.Close()
+
+	var count int
+	err := db.QueryRow("SELECT Count(*) FROM users WHERE name = ?", name).Scan(&count)
+	if err != nil {
+		panic(err.Error())
+	}
+	return count != 0
+}
+
 func IsUserExistByNameAndPwd(name string, pwd string) bool {
 	dbConnect()
 	defer db.Close()
