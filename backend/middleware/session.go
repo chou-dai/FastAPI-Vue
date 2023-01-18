@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"gin_backend/service"
+	. "gin_backend/session"
 	"net/http"
 
 	"github.com/gin-contrib/sessions"
@@ -13,6 +15,10 @@ func IsAuth(c *gin.Context) {
 
 	if sessionId == nil {
 		c.Status(http.StatusUnauthorized)
+	} else if !service.IsUserExistBySessionId(sessionId.(string)) {
+		ClearSession(c)
+		c.Status(http.StatusUnauthorized)
+		c.Abort()
 	} else {
 		c.Status(http.StatusOK)
 	}
@@ -25,6 +31,10 @@ func AuthenticateBySession() gin.HandlerFunc {
 		sessionId := session.Get("SessionId")
 
 		if sessionId == nil {
+			c.Status(http.StatusUnauthorized)
+			c.Abort()
+		} else if !service.IsUserExistBySessionId(sessionId.(string)) {
+			ClearSession(c)
 			c.Status(http.StatusUnauthorized)
 			c.Abort()
 		} else {

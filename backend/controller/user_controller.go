@@ -14,11 +14,11 @@ import (
 func SignUp(c *gin.Context) {
 	var user model.User
 	c.BindJSON(&user)
-	if service.IsUserExist(user) {
+	// ユーザー名重複チェック
+	if service.IsUserExistByName(user.Name) {
 		c.Status(http.StatusBadRequest)
 		return
 	}
-
 	sessionId := uuid.New()
 	user.SessionId = sessionId.String()
 	newUser := service.CreateUser(user)
@@ -31,17 +31,19 @@ func SignUp(c *gin.Context) {
 func Login(c *gin.Context) {
 	var user model.User
 	c.BindJSON(&user)
+	//ユーザー名とパスワードチェック
 	if !service.IsUserExist(user) {
 		c.Status(http.StatusBadRequest)
 		return
 	}
-
 	sessionId := uuid.New()
 	updateUser := service.UpdateSessionIdByName(sessionId.String(), user.Name)
 	// セッションに登録
 	session.SetLoginUserToSession(c, updateUser)
 	c.Status(http.StatusOK)
 }
+
+// 以下Authユーザー
 
 func Logout(c *gin.Context) {
 	// セッションをクリア
@@ -51,10 +53,9 @@ func Logout(c *gin.Context) {
 
 func GetMe(c *gin.Context) {
 	loginUser := session.GetLoginUserFromSession(c)
-
+	// セッションで管理しているユーザーをレスポンス型にキャスト
 	var user model.LoginUserResponse
 	user.Id = loginUser.UserId
 	user.Name = loginUser.Name
-
 	c.JSON(http.StatusOK, user)
 }

@@ -15,6 +15,8 @@ func GetPublicMemories(c *gin.Context) {
 	c.JSON(http.StatusOK, memories)
 }
 
+// 以下Authユーザー
+
 func GetMyMemories(c *gin.Context) {
 	loginUser := session.GetLoginUserFromSession(c)
 

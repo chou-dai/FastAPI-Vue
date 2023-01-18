@@ -5,6 +5,14 @@ import (
 	"gin_backend/repository"
 )
 
+func IsUserExistBySessionId(sessionId string) bool {
+	return repository.IsUserExistBySessionId(sessionId)
+}
+
+func IsUserExistByName(name string) bool {
+	return repository.IsUserExistByName(name)
+}
+
 func IsUserExist(user model.User) bool {
 	return repository.IsUserExistByNameAndPwd(user.Name, user.Password)
 }
