@@ -9,6 +9,7 @@
     "codegen": "openapi-generator generate -g typescript-axios -i ../backend/swagger.yml -o ./src/client/"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.10",
     "@openapitools/openapi-generator-cli": "^2.5.2",
     "core-js": "^3.8.3",
     "element-plus": "^2.2.28",

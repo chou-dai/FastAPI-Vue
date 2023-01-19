@@ -6,7 +6,6 @@ import { MemoryRequest } from '@/client';
     props: {
         title: String,
         inputState: Object,
-        changeInputState: Function,
         onClose: Function,
         onSubmit: Function
     },
@@ -15,7 +14,6 @@ import { MemoryRequest } from '@/client';
 export default class MemoryModal extends Vue {
     public title!: string;
     public inputState!: MemoryRequest;
-    public changeInputState!: () => void;
     public onClose!: () => void;
     public onSubmit!: () => void;
 }
@@ -24,24 +22,39 @@ export default class MemoryModal extends Vue {
 
 <template>
     <div class="modal-outer">
+        <div class="modal-backdrop" @click="onClose" />
         <div class="modal-inner">
-            <h2>{{ title }}</h2>
-            タイトル
-            <input
-                name="title"
-                :value="inputState.title"
-                @input="changeInputState"
-            />
-            説明
-            <input
-                name="description"
-                :value="inputState.description"
-                @input="changeInputState"
-            />
-            <div>
-                <button @click="onClose">キャンセル</button>
-                <button @click="onSubmit">送信</button>
+            <h3 class="text-center">{{ title }}</h3>
+            <div class="m-y-small">
+                <span>タイトル<span class="required">※</span></span>
+                <el-input
+                    v-model="inputState.title"
+                    maxlength="20"
+                    show-word-limit
+                    type="text"
+                />
             </div>
+            <div class="m-y-small">
+                <span>説明</span>
+                <el-input
+                    v-model="inputState.description"
+                    maxlength="50"
+                    show-word-limit
+                    type="textarea"
+                />
+            </div>
+            <el-row class="m-y-small" justify="space-between">
+                <span>タイムラインに公開</span>
+                <el-switch v-model="inputState.isPublic" />
+            </el-row>
+            <el-row class="m-t-middle" justify="space-between">
+                <el-button @click="onClose">キャンセル</el-button>
+                <el-button
+                    type="primary"
+                    :disabled="inputState.title === ''"
+                    @click="onSubmit"
+                >保存</el-button>
+            </el-row>
         </div>
     </div>
 </template>

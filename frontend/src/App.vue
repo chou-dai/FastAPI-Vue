@@ -1,7 +1,6 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import Header from './components/Header.vue';
-import { useMyMemoriesStore } from '@/store/myMemoriesStore';
 import { usePublicMemoriesStore } from './store/publicMemoriesStore';
 import { useIsAuthStore } from './store/isAuthStore';
 
@@ -15,7 +14,7 @@ export default class App extends Vue {
     async created() {
         await useIsAuthStore().fetchIsAuth();
         await usePublicMemoriesStore().fetchPublicMemories();
-        await useMyMemoriesStore().fetchMyMemories();
+        // await useMyMemoriesStore().fetchMyMemories();
     }
 }
 </script>
