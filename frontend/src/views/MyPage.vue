@@ -8,6 +8,7 @@ import { memoryApi } from '@/client/clientWrapper';
 import { useOpenModalStore } from '@/store/openModalStore';
 import { useIsAuthStore } from '@/store/isAuthStore';
 import { ElMessage } from 'element-plus';
+import { authErrorMessage, serverErrorMessage } from '../util/errorHandler';
 
 @Options({
     components: {
@@ -49,6 +50,10 @@ export default class MyPage extends Vue {
         await memoryApi.apiAuthMemoriesPost(this.inputState)
             .then(() => {
                 this.successMessage();
+            })
+            .catch((err) => {
+                if(err.response.status == 401) authErrorMessage();
+                else serverErrorMessage();
             });
         await this.myMemoriesStore.fetchMyMemories();
         await this.publicMemoriesStore.fetchPublicMemories();
@@ -59,6 +64,10 @@ export default class MyPage extends Vue {
         await memoryApi.apiAuthMemoriesIdPut(this.inputState.id!, this.inputState)
             .then(() => {
                 this.successMessage();
+            })
+            .catch((err) => {
+                if(err.response.status == 401) authErrorMessage();
+                else serverErrorMessage();
             });
         await this.myMemoriesStore.fetchMyMemories();
         await this.publicMemoriesStore.fetchPublicMemories();
@@ -69,6 +78,10 @@ export default class MyPage extends Vue {
             await memoryApi.apiAuthMemoriesIdDelete(memory.id)
                 .then(() => {
                     this.successMessage();
+                })
+                .catch((err) => {
+                    if(err.response.status == 401) authErrorMessage();
+                    else serverErrorMessage();
                 });
             await this.myMemoriesStore.fetchMyMemories();
             await this.publicMemoriesStore.fetchPublicMemories();
