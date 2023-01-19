@@ -57,13 +57,41 @@ main {
 .modal-inner {
     position: relative;
     width: 80%;
-    max-width: 500px;
+    max-width: 350px;
     background-color: white;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     padding: 20px;
 }
+.modal-backdrop {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
 .el-menu--horizontal {
     border-bottom: 0;
+}
+.el-menu-item {
+    padding: 0;
+}
+.text-center {
+    text-align: center;
+}
+.m-y-small {
+    margin: 10px 0;
+}
+.m-t-middle {
+    margin-top: 20px;
+}
+.error-message {
+    color: #dc3545;
+    font-size: small;
+}
+.required {
+    color: #dc3545;
+    margin-left: 5px;
 }

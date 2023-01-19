@@ -19,10 +19,10 @@ export default class Header extends Vue {
             :ellipsis="false"
         >
             <el-menu-item index="home">
-                <router-link to="/">ホーム</router-link>
+                <router-link to="/" class="nav-link">ホーム</router-link>
             </el-menu-item>
             <el-menu-item index="mypage">
-                <router-link to="/mypage">My記録</router-link>
+                <router-link to="/mypage" class="nav-link">My記録</router-link>
             </el-menu-item>
         </el-menu>
     </div>

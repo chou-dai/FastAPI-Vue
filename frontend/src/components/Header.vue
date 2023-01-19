@@ -14,50 +14,52 @@ import { useIsAuthStore } from '@/store/isAuthStore';
     }
 })
 export default class Header extends Vue {
-
     public openModalStore = useOpenModalStore();
-    private initialInputState: UserRequest = {
+    public isAuthStore = useIsAuthStore();
+    public isInputError = false;
+    private initialState: UserRequest = {
         name: "",
         password: ""
     };
-    public inputState = this.initialInputState;
-    public isAuthStore = useIsAuthStore();
+    public inputState = Object.assign({}, this.initialState);
 
-    // サインアップ・ログインモーダルの文字入力の状態更新
-    public changeInputState(e: any) {
-        this.inputState = {
-            ...this.inputState,
-            [e.target.name]: e.target.value
-        }
-    }
     // サインアップモーダルを開く
     public openSignupModal() {
         this.openModalStore.openSignupModal();
-        this.inputState = this.initialInputState;
+        this.isInputError = false;
+        this.inputState = Object.assign({}, this.initialState);
+        this.isInputError = false;
     }
     // ログインモーダルを開く
     public openLoginModal() {
         this.openModalStore.openLoginModal();
-        this.inputState = this.initialInputState;
+        this.isInputError = false;
+        this.inputState = Object.assign({}, this.initialState);
     }
     // サインアップAPIを送信
     public async submitSignup() {
-        this.openModalStore.closeSignupModal()
         await userApi.apiSignupPost(this.inputState)
             .then(res => {
                 if (res.status === 200) {
+                    this.openModalStore.closeSignupModal()
                     location.reload();
                 }
+            })
+            .catch(() => {
+                this.isInputError = true;
             });
     }
     // ログインAPIを送信
     public async submitLogin() {
-        this.openModalStore.closeLoginModal()
         await userApi.apiLoginPost(this.inputState)
             .then(res => {
                 if (res.status === 200) {
+                    this.openModalStore.closeLoginModal()
                     location.reload();
                 }
+            })
+            .catch(() => {
+                this.isInputError = true;
             });
     }
     // ログアウトAPIを送信
@@ -76,9 +78,21 @@ export default class Header extends Vue {
     <header class="accent-color">
         <Navigation />
         <div>
-            <el-button type="primary" v-if="!isAuthStore.isAuth" @click="openLoginModal">ログイン</el-button>
-            <el-button type="primary" v-if="!isAuthStore.isAuth" @click="openSignupModal">サインアップ</el-button>
-            <el-button type="success" v-if="isAuthStore.isAuth" @click="submitLogout">ログアウト</el-button>
+            <el-button
+                v-if="!isAuthStore.isAuth"
+                type="primary"
+                @click="openLoginModal"
+            >ログイン</el-button>
+            <el-button
+                v-if="!isAuthStore.isAuth"
+                type="primary"
+                @click="openSignupModal"
+            >サインアップ</el-button>
+            <el-button
+                v-if="isAuthStore.isAuth"
+                type="primary"
+                @click="submitLogout"
+            >ログアウト</el-button>
         </div>
         
     </header>
@@ -86,16 +100,18 @@ export default class Header extends Vue {
         v-if="openModalStore.isOpenedSignupModal"
         title="サインアップ"
         :inputState="inputState"
-        :changeInputState="changeInputState"
         :onClose="openModalStore.closeSignupModal"
         :onSubmit="submitSignup"
+        :isError="isInputError"
+        errorMessage="このユーザー名はすでに使用されています。"
     />
     <UserModal
         v-if="openModalStore.isOpenedLoginModal"
         title="ログイン"
         :inputState="inputState"
-        :changeInputState="changeInputState"
         :onClose="openModalStore.closeLoginModal"
         :onSubmit="submitLogin"
+        :isError="isInputError"
+        errorMessage="ユーザー名もしくはパスワードに誤りがあります。"
     />
 </template>

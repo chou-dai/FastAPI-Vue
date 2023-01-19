@@ -6,42 +6,53 @@ import { UserRequest } from '@/client';
     props: {
         title: String,
         inputState: Object,
-        changeInputState: Function,
         onClose: Function,
-        onSubmit: Function
+        onSubmit: Function,
+        isError: Boolean,
+        errorMessage: String
     },
 })
 
 export default class UserModal extends Vue {
     public title!: string;
     public inputState!: UserRequest;
-    public changeInputState!: () => void;
     public onClose!: () => void;
     public onSubmit!: () => void;
+    public isError!: boolean;
+    public errorMessage!: string;
 }
 </script>
 
 
 <template>
     <div class="modal-outer">
+        <div class="modal-backdrop" @click="onClose" />
         <div class="modal-inner">
-            <h1>{{ title }}</h1>
-            名前
-            <input
-                name="name"
-                :value="inputState.name"
-                @input="changeInputState"
-            />
-            パスワード
-            <input
-                name="password"
-                :value="inputState.password"
-                @input="changeInputState"
-            />
-            <div>
-                <button @click="onClose">キャンセル</button>
-                <button @click="onSubmit">送信</button>
+            <h3 class="text-center">{{ title }}</h3>
+            <div class="error-message">
+                <span v-if="isError">{{ errorMessage }}</span>
             </div>
+            <el-input
+                v-model="inputState.name"
+                placeholder="ユーザー名"
+                maxlength="10"
+                show-word-limit
+                type="text"
+                class="m-y-small"
+            />
+            <el-input
+                v-model="inputState.password"
+                placeholder="パスワード"
+                maxlength="30"
+                type="text"
+                class="m-y-small"
+            />
+            <el-button
+                class="m-t-middle"
+                type="primary"
+                :disabled="inputState.password === '' || inputState.name === ''"
+                @click="onSubmit"
+            >送信</el-button>
         </div>
     </div>
 </template>
