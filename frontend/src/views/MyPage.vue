@@ -2,18 +2,16 @@
 import { Options, Vue } from 'vue-class-component';
 import { useMyMemoriesStore } from '@/store/myMemoriesStore';
 import { usePublicMemoriesStore } from '@/store/publicMemoriesStore';
-import MemoryModal from "../components/MemoryModal.vue";
+import { MemoryModal, MemoryListItem } from "../components";
 import { MemoryRequest, MyMemory as Memory } from '@/client';
 import { memoryApi } from '@/client/clientWrapper';
 import { useOpenModalStore } from '@/store/openModalStore';
 import { useIsAuthStore } from '@/store/isAuthStore';
-import { Delete, Edit } from '@element-plus/icons-vue'
 
 @Options({
     components: {
         MemoryModal,
-        Delete,
-        Edit
+        MemoryListItem
     }
 })
 export default class MyPage extends Vue {
@@ -68,22 +66,11 @@ export default class MyPage extends Vue {
         <div v-if="isAuthStore.isAuth">
             <el-button type="primary" @click="openCreateModal">新規作成</el-button>
             <div v-for="memory in myMemoriesStore.memories" :key="memory.id">
-                <div>●:{{ memory.title }}</div>
-                <div>○:{{ memory.description }}</div>
-                <div>○:{{ memory.createdAt }}</div>
-                <div>○:{{ memory.isPublic }}</div>
-                <el-button-group>
-                    <el-button type="primary" @click="openUpdateModal(memory)">
-                        <el-icon>
-                            <Edit />
-                        </el-icon>
-                    </el-button>
-                    <el-button type="danger" @click="deleteMemory(memory)">
-                        <el-icon>
-                            <Delete />
-                        </el-icon>
-                    </el-button>
-                </el-button-group>
+                <MemoryListItem
+                    :memory="memory"
+                    :onClickEdit="() => openUpdateModal(memory)"
+                    :onClickDelete="() => deleteMemory(memory)"
+                />
             </div>
             <MemoryModal
                 v-if="openModalStore.isOpenedCreateMemoryModal"
