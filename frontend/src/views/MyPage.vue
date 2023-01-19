@@ -2,18 +2,17 @@
 import { Options, Vue } from 'vue-class-component';
 import { useMyMemoriesStore } from '@/store/myMemoriesStore';
 import { usePublicMemoriesStore } from '@/store/publicMemoriesStore';
-import MemoryModal from "../components/MemoryModal.vue";
+import { MemoryModal, MyMemoryListItem } from "../components";
 import { MemoryRequest, MyMemory as Memory } from '@/client';
 import { memoryApi } from '@/client/clientWrapper';
 import { useOpenModalStore } from '@/store/openModalStore';
 import { useIsAuthStore } from '@/store/isAuthStore';
-import { Delete, Edit } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus';
 
 @Options({
     components: {
         MemoryModal,
-        Delete,
-        Edit
+        MyMemoryListItem
     }
 })
 export default class MyPage extends Vue {
@@ -28,6 +27,12 @@ export default class MyPage extends Vue {
     };
     public inputState = Object.assign({}, this.initialState);
 
+    private successMessage() {
+        ElMessage({
+            message: '処理が正常に行われました。',
+            type: 'success',
+        })
+    }
     // メモリー作成モーダルを開く
     public openCreateModal() {
         this.openModalStore.openCreateMemoryModal();
@@ -41,21 +46,30 @@ export default class MyPage extends Vue {
     // メモリー作成APIをPOST
     public async submitCreateMemory() {
         this.openModalStore.closeCreateMemoryModal()
-        await memoryApi.apiAuthMemoriesPost(this.inputState);
+        await memoryApi.apiAuthMemoriesPost(this.inputState)
+            .then(() => {
+                this.successMessage();
+            });
         await this.myMemoriesStore.fetchMyMemories();
         await this.publicMemoriesStore.fetchPublicMemories();
     }
     // メモリー更新APIをPUT
     public async submitUpdateMemory() {
         this.openModalStore.closeUpdateMemoryModal()
-        await memoryApi.apiAuthMemoriesIdPut(this.inputState.id!, this.inputState);
+        await memoryApi.apiAuthMemoriesIdPut(this.inputState.id!, this.inputState)
+            .then(() => {
+                this.successMessage();
+            });
         await this.myMemoriesStore.fetchMyMemories();
         await this.publicMemoriesStore.fetchPublicMemories();
     }
     // メモリー削除APIをDELETE
     public async deleteMemory(memory: Memory) {
         if(confirm(memory.title+"を本当に削除しますか？")) {
-            await memoryApi.apiAuthMemoriesIdDelete(memory.id);
+            await memoryApi.apiAuthMemoriesIdDelete(memory.id)
+                .then(() => {
+                    this.successMessage();
+                });
             await this.myMemoriesStore.fetchMyMemories();
             await this.publicMemoriesStore.fetchPublicMemories();
         }
@@ -66,24 +80,19 @@ export default class MyPage extends Vue {
 <template>
     <div class="container">
         <div v-if="isAuthStore.isAuth">
+            <h1>My記録</h1>
             <el-button type="primary" @click="openCreateModal">新規作成</el-button>
-            <div v-for="memory in myMemoriesStore.memories" :key="memory.id">
-                <div>●:{{ memory.title }}</div>
-                <div>○:{{ memory.description }}</div>
-                <div>○:{{ memory.createdAt }}</div>
-                <div>○:{{ memory.isPublic }}</div>
-                <el-button-group>
-                    <el-button type="primary" @click="openUpdateModal(memory)">
-                        <el-icon>
-                            <Edit />
-                        </el-icon>
-                    </el-button>
-                    <el-button type="danger" @click="deleteMemory(memory)">
-                        <el-icon>
-                            <Delete />
-                        </el-icon>
-                    </el-button>
-                </el-button-group>
+            <div v-if="myMemoriesStore.memories.length > 0" class="memories-list">
+                <div class="list-item glass"
+                    v-for="memory in myMemoriesStore.memories"
+                    :key="memory.id"
+                >
+                    <MyMemoryListItem
+                        :memory="memory"
+                        :onClickEdit="() => openUpdateModal(memory)"
+                        :onClickDelete="() => deleteMemory(memory)"
+                    />
+                </div>
             </div>
             <MemoryModal
                 v-if="openModalStore.isOpenedCreateMemoryModal"
@@ -94,7 +103,7 @@ export default class MyPage extends Vue {
             />
             <MemoryModal
                 v-if="openModalStore.isOpenedUpdateMemoryModal"
-                title="記録の変更"
+                title="記録の編集"
                 :inputState="inputState"
                 :onClose="openModalStore.closeUpdateMemoryModal"
                 :onSubmit="submitUpdateMemory"
