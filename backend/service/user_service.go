@@ -3,6 +3,8 @@ package service
 import (
 	"gin_backend/model"
 	"gin_backend/repository"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 func IsUserExistBySessionId(sessionId string) bool {
@@ -13,11 +15,26 @@ func IsUserExistByName(name string) bool {
 	return repository.IsUserExistByName(name)
 }
 
-func IsUserExist(user model.User) bool {
-	return repository.IsUserExistByNameAndPwd(user.Name, user.Password)
+func IsUserExistForLogin(user model.User) bool {
+	pw := repository.GetPasswordByName(user.Name)
+	if pw == "" {
+		return false
+	}
+	// DB上のパスワードハッシュと入力パスワードを比較
+	err := bcrypt.CompareHashAndPassword([]byte(pw), []byte(user.Password))
+	if err != nil {
+		return false
+	}
+	return true
 }
 
 func CreateUser(user model.User) model.User {
+	// パスワードのハッシュ化
+	hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		panic(err.Error())
+	}
+	user.Password = string(hash)
 	repository.CreateUser(user)
 	return repository.GetUserBySessionId(user.SessionId)
 }
