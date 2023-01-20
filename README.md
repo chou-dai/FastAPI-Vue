@@ -1,4 +1,4 @@
-# Memory Time App
+# Memory CountUp Timer Application
 
 ## 概要
 
