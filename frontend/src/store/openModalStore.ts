@@ -3,8 +3,10 @@ import { defineStore } from "pinia";
 export interface OpenModalType {
     isOpenedCreateMemoryModal: boolean;
     isOpenedUpdateMemoryModal: boolean;
+
     isOpenedSignupModal: boolean;
     isOpenedLoginModal: boolean;
+    isOpenedUpdateUserModal: boolean;
 }
 
 export const useOpenModalStore = defineStore("openModal", {
@@ -14,6 +16,7 @@ export const useOpenModalStore = defineStore("openModal", {
         isOpenedUpdateMemoryModal: false,
         isOpenedSignupModal: false,
         isOpenedLoginModal: false,
+        isOpenedUpdateUserModal: false
     }),
 
     getters: {},
@@ -45,6 +48,13 @@ export const useOpenModalStore = defineStore("openModal", {
         },
         closeLoginModal() {
             this.isOpenedLoginModal = false;
+        },
+
+        openUpdateUserModal() {
+            this.isOpenedUpdateUserModal = true;
+        },
+        closeUpdateUserModal() {
+            this.isOpenedUpdateUserModal = false;
         }
     }
 });

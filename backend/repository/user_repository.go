@@ -76,3 +76,15 @@ func UpdateSessionIdByName(sessionId string, name string) {
 	}
 	defer update.Close()
 }
+
+func UpdateNameById(id int, name string) {
+	dbConnect()
+	defer db.Close()
+
+	update, err := db.Query(
+		"UPDATE users SET name = ? WHERE id = ?", name, id)
+	if err != nil {
+		panic(err.Error())
+	}
+	defer update.Close()
+}
