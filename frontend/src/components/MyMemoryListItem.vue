@@ -2,13 +2,15 @@
 import { Options, Vue } from "vue-class-component";
 import { MyMemory } from '@/client';
 import { Delete, Edit, Position, MoreFilled } from '@element-plus/icons-vue';
+import TimeCount from '../components/TimeCount.vue';
 
 @Options({
     components: {
         Delete,
         Edit,
         Position,
-        MoreFilled
+        MoreFilled,
+        TimeCount
     },
     props: {
         memory: Object,
@@ -26,7 +28,7 @@ export default class MyMemoryListItem extends Vue {
 
 <template>
     <div class="list-item-content">
-        <div>{{ memory.createdAt }}</div>
+        <TimeCount :createdAt="new Date(memory.createdAt.replace('Z',''))" />
         <div>
             <div>{{ memory.title }}</div>
             <el-tag v-if="memory.isPublic" size="small" effect="dark" round>
@@ -52,6 +54,6 @@ export default class MyMemoryListItem extends Vue {
                     </el-button-group>
                 </el-dropdown-menu>
             </template>
-          </el-dropdown>
+        </el-dropdown>
     </div>
 </template>

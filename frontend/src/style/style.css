@@ -3,7 +3,7 @@ a {
     color: white;
 }
 .accent-color {
-    background-color: #694F94;
+    background-color: var(--el-color-primary);
     color: white;
 }
 .accent-color-10 {
