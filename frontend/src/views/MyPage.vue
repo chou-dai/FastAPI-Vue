@@ -1,24 +1,24 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { useMyMemoriesStore } from '@/store/myMemoriesStore';
-import { usePublicMemoriesStore } from '@/store/publicMemoriesStore';
-import { MemoryModal, MyMemoryListItem } from "../components";
+import { MemoryModal, MyMemoryListItem, BaseButton } from "../components";
 import { MemoryRequest, MyMemory as Memory } from '@/client';
 import { memoryApi } from '@/client/clientWrapper';
 import { useOpenModalStore } from '@/store/openModalStore';
 import { useIsAuthStore } from '@/store/isAuthStore';
 import { ElMessage } from 'element-plus';
 import { authErrorMessage, serverErrorMessage } from '../util/errorHandler';
+import { memoriesFetchApi } from '@/util/fetchApiWrapper';
 
 @Options({
     components: {
         MemoryModal,
-        MyMemoryListItem
+        MyMemoryListItem,
+        BaseButton
     }
 })
 export default class MyPage extends Vue {
     public myMemoriesStore = useMyMemoriesStore();
-    public publicMemoriesStore = usePublicMemoriesStore();
     public openModalStore = useOpenModalStore();
     public isAuthStore = useIsAuthStore();
     private initialState: MemoryRequest = {
@@ -28,6 +28,7 @@ export default class MyPage extends Vue {
     };
     public inputState = Object.assign({}, this.initialState);
 
+    // 処理成功時のメッセージ
     private successMessage() {
         ElMessage({
             message: '処理が正常に行われました。',
@@ -61,29 +62,27 @@ export default class MyPage extends Vue {
     public async submitUpdateMemory() {
         this.openModalStore.closeUpdateMemoryModal()
         await memoryApi.apiAuthMemoriesIdPut(this.inputState.id!, this.inputState)
-            .then(() => {
+            .then(async() => {
                 this.successMessage();
+                memoriesFetchApi();
             })
             .catch((err) => {
                 if(err.response.status == 401) authErrorMessage();
                 else serverErrorMessage();
             });
-        await this.myMemoriesStore.fetchMyMemories();
-        await this.publicMemoriesStore.fetchPublicMemories();
     }
     // メモリー削除APIをDELETE
     public async deleteMemory(memory: Memory) {
         if(confirm(memory.title+"を本当に削除しますか？")) {
             await memoryApi.apiAuthMemoriesIdDelete(memory.id)
-                .then(() => {
+                .then(async() => {
                     this.successMessage();
+                    memoriesFetchApi();
                 })
                 .catch((err) => {
                     if(err.response.status == 401) authErrorMessage();
                     else serverErrorMessage();
                 });
-            await this.myMemoriesStore.fetchMyMemories();
-            await this.publicMemoriesStore.fetchPublicMemories();
         }
     }
 }
@@ -92,8 +91,14 @@ export default class MyPage extends Vue {
 <template>
     <div class="container">
         <div v-if="isAuthStore.isAuth">
-            <h1>My記録</h1>
-            <el-button type="primary" @click="openCreateModal">新規作成</el-button>
+            <div class="page-title">
+                <h1>My記録</h1>
+                <BaseButton
+                    title="新規登録"
+                    :onClick="openCreateModal"
+                    size="large"
+                />
+            </div>
             <div v-if="myMemoriesStore.memories.length > 0" class="memories-list">
                 <div class="list-item glass"
                     v-for="memory in myMemoriesStore.memories"

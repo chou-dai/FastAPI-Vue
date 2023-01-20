@@ -3,17 +3,21 @@ import { UserRequest } from "@/client";
 import { userApi } from "@/client/clientWrapper";
 import { useOpenModalStore } from "@/store/openModalStore";
 import { Options, Vue } from "vue-class-component";
-import UserModal from "../components/UserModal.vue";
-import Navigation from "../components/Navigation.vue";
 import { useIsAuthStore } from '@/store/isAuthStore';
 import { useLoginUserStore } from "@/store/loginUserStore";
 import { allFetchApi } from "../util/fetchApiWrapper";
 import { ElMessage } from 'element-plus';
+import { UserFilled } from '@element-plus/icons-vue';
+import UserModal from "./UserModal.vue";
+import Navigation from "./Navigation.vue";
+import BaseButton from "./BaseButton.vue";
 
 @Options({
     components: {
         UserModal,
-        Navigation
+        Navigation,
+        BaseButton,
+        UserFilled
     }
 })
 export default class Header extends Vue {
@@ -27,6 +31,7 @@ export default class Header extends Vue {
     public inputState = Object.assign({}, this.initialState);
     public loginUserInfo = useLoginUserStore();
 
+    // 処理成功時のメッセージ
     private successMessage() {
         ElMessage({
             message: '処理が正常に行われました。',
@@ -83,8 +88,8 @@ export default class Header extends Vue {
             .then(async(res) => {
                 if (res.status === 200) {
                     this.successMessage();
-                    this.openModalStore.closeUpdateUserModal()
                     await allFetchApi()
+                    this.openModalStore.closeUpdateUserModal()
                 }
             })
             .catch(() => {
@@ -104,33 +109,36 @@ export default class Header extends Vue {
 </script>
 
 <template>
-    <header class="accent-color">
+    <header>
         <Navigation />
-        <div>
-            <el-button
-                v-if="!isAuthStore.isAuth"
-                type="primary"
+        <div v-if="!isAuthStore.isAuth">
+            <BaseButton
                 @click="openLoginModal"
-            >ログイン</el-button>
-            <el-button
-                v-if="!isAuthStore.isAuth"
-                type="primary"
+                title="ログイン"
+            />
+            <BaseButton
                 @click="openSignupModal"
-            >サインアップ</el-button>
-            <el-button
-                v-if="isAuthStore.isAuth"
-                type="primary"
-                @click="openUpdateUserNameModal"
-                color="#694F94"
-                plain
-            >ユーザー名変更</el-button>
-            <el-button
-                v-if="isAuthStore.isAuth"
-                type="primary"
-                @click="submitLogout"
-            >ログアウト</el-button>
+                title="サインアップ"
+            />
         </div>
-        
+        <el-dropdown v-if="isAuthStore.isAuth" trigger="click">
+            <el-button circle size="large">
+                <el-icon><UserFilled /></el-icon>
+            </el-button>
+            <template #dropdown>
+                <el-dropdown-menu class="dropdown-menu">
+                    <div>{{ loginUserInfo.name }}</div>
+                    <BaseButton
+                        @click="openUpdateUserNameModal"
+                        title="名前変更"
+                    />
+                    <BaseButton
+                        @click="submitLogout"
+                        title="ログアウト"
+                    />
+                </el-dropdown-menu>
+            </template>
+        </el-dropdown>
     </header>
     <UserModal
         v-if="openModalStore.isOpenedSignupModal"

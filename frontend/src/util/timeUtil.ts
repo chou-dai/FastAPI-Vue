@@ -1,3 +1,10 @@
+import {format} from "date-fns";
+
+export const parseDate = (date: Date) => {
+    return format(date, "yyyy/MM/dd");
+};
+
+
 const ms = 1000;
 const s = 60;
 const m = 60;

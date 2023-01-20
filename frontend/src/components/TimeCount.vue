@@ -4,8 +4,8 @@ import { getYears, getDays, getHoursStr, getMinutesStr, getSecondsStr } from "..
 
 @Options({
     props: {
-        createdAt: Date,
-    },
+        createdAt: Date
+    }
 })
 export default class TimeCount extends Vue {
     public createdAt!: Date;
@@ -39,12 +39,12 @@ export default class TimeCount extends Vue {
 </script>
 
 <template>
-    <div>
+    <h3 class="count-timer">
         <div v-if="createDisplayDays(diff)">
             {{ createDisplayDays(diff) }}
         </div>
         <div>
             {{ createDisplayTime(diff) }}
         </div>
-    </div>
+    </h3>
 </template>

@@ -1,14 +1,18 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { MemoryRequest } from '@/client';
+import BaseButton from "./BaseButton.vue";
 
 @Options({
+    components: {
+        BaseButton
+    },
     props: {
         title: String,
         inputState: Object,
         onClose: Function,
         onSubmit: Function
-    },
+    }
 })
 
 export default class MemoryModal extends Vue {
@@ -48,9 +52,11 @@ export default class MemoryModal extends Vue {
                 <el-switch v-model="inputState.isPublic" />
             </el-row>
             <el-row class="m-t-middle" justify="space-between">
-                <el-button @click="onClose">キャンセル</el-button>
+                <BaseButton
+                    title="キャンセル"
+                    :onClick="onClose"
+                />
                 <el-button
-                    type="primary"
                     :disabled="inputState.title === ''"
                     @click="onSubmit"
                 >保存</el-button>
