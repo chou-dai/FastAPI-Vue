@@ -53,6 +53,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LoginUserResponse'
+    put:
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: サーバーは正常に動作しています
   /api/memories:
     get:
       tags:

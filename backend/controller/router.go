@@ -24,7 +24,7 @@ func Router(router *gin.Engine) {
 			users := auth.Group("/users")
 			{
 				users.GET("", GetMe)
-				users.PUT("")
+				users.PUT("", UpdateUserName)
 			}
 			memories := auth.Group("/memories")
 			{

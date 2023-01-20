@@ -707,6 +707,39 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        apiAuthUsersPut: async (userRequest?: UserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/auth/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(userRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         apiLoginPost: async (userRequest?: UserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/login`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -801,6 +834,16 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async apiAuthUsersPut(userRequest?: UserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthUsersPut(userRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async apiLoginPost(userRequest?: UserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiLoginPost(userRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -840,6 +883,15 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          */
         apiAuthUsersGet(options?: any): AxiosPromise<LoginUserResponse> {
             return localVarFp.apiAuthUsersGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UserRequest} [userRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthUsersPut(userRequest?: UserRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.apiAuthUsersPut(userRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -887,6 +939,17 @@ export class UserApi extends BaseAPI {
      */
     public apiAuthUsersGet(options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).apiAuthUsersGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UserRequest} [userRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public apiAuthUsersPut(userRequest?: UserRequest, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).apiAuthUsersPut(userRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

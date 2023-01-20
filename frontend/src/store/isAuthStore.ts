@@ -1,6 +1,6 @@
 import { authApi } from "@/client/clientWrapper";
 import { defineStore } from "pinia";
-import { useMyMemoriesStore } from "./myMemoriesStore"
+import { authUserFetchApi } from "@/util/fetchApiWrapper";
 
 
 export const useIsAuthStore = defineStore("isAuth", {
@@ -17,8 +17,7 @@ export const useIsAuthStore = defineStore("isAuth", {
                 .then(async(res) => {
                     console.log("Authenticated User");
                     this.isAuth = (res.status === 200);
-                    // MyMemoriesをfetch
-                    await useMyMemoriesStore().fetchMyMemories();
+                    await authUserFetchApi();
                 })
                 .catch(() => {
                     console.log("Not Authenticated User");

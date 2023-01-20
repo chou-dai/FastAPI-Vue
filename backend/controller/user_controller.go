@@ -4,6 +4,7 @@ import (
 	"gin_backend/model"
 	"gin_backend/service"
 	"gin_backend/session"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -56,4 +57,20 @@ func GetMe(c *gin.Context) {
 	user.Id = loginUser.UserId
 	user.Name = loginUser.Name
 	c.JSON(http.StatusOK, user)
+}
+
+func UpdateUserName(c *gin.Context) {
+	log.Print("dsfjaklie")
+	var updateUser model.User
+	c.BindJSON(&updateUser)
+	loginUser := session.GetLoginUserFromSession(c)
+	if !service.UpdateUserName(loginUser, updateUser) {
+		c.Status(http.StatusBadRequest)
+		return
+	}
+	// セッションで管理しているユーザーを更新
+	updateUser.Id = loginUser.UserId
+	updateUser.SessionId = loginUser.SessionId
+	session.SetLoginUserToSession(c, updateUser)
+	c.Status(http.StatusOK)
 }
