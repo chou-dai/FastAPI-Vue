@@ -6,19 +6,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func GetUserBySessionId(sessionId string) model.User {
-	dbConnect()
-	defer db.Close()
-
-	var user model.User
-	err := db.QueryRow("SELECT id, name, session_id FROM users WHERE session_id = ?", sessionId).Scan(
-		&user.Id, &user.Name, &user.SessionId)
-	if err != nil {
-		panic(err.Error())
-	}
-	return user
-}
-
 func IsUserExistBySessionId(sessionId string) bool {
 	dbConnect()
 	defer db.Close()
@@ -43,16 +30,26 @@ func IsUserExistByName(name string) bool {
 	return count != 0
 }
 
-func IsUserExistByNameAndPwd(name string, pwd string) bool {
+func GetPasswordByName(name string) string {
 	dbConnect()
 	defer db.Close()
 
-	var count int
-	err := db.QueryRow("SELECT Count(*) FROM users WHERE name = ? AND password = ?", name, pwd).Scan(&count)
+	var pw string
+	_ = db.QueryRow("SELECT password FROM users WHERE name = ?", name).Scan(&pw)
+	return pw
+}
+
+func GetUserBySessionId(sessionId string) model.User {
+	dbConnect()
+	defer db.Close()
+
+	var user model.User
+	err := db.QueryRow("SELECT id, name, session_id FROM users WHERE session_id = ?", sessionId).Scan(
+		&user.Id, &user.Name, &user.SessionId)
 	if err != nil {
 		panic(err.Error())
 	}
-	return count != 0
+	return user
 }
 
 func CreateUser(user model.User) {

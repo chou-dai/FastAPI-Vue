@@ -4,7 +4,6 @@ import (
 	"gin_backend/model"
 	"gin_backend/service"
 	"gin_backend/session"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -25,14 +24,13 @@ func SignUp(c *gin.Context) {
 	// セッションに登録
 	session.SetLoginUserToSession(c, newUser)
 	c.Status(http.StatusOK)
-	log.Print(session.GetLoginUserFromSession(c).Name)
 }
 
 func Login(c *gin.Context) {
 	var user model.User
 	c.BindJSON(&user)
 	//ユーザー名とパスワードチェック
-	if !service.IsUserExist(user) {
+	if !service.IsUserExistForLogin(user) {
 		c.Status(http.StatusBadRequest)
 		return
 	}
