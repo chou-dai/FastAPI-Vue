@@ -49,7 +49,6 @@ export default class UserModal extends Vue {
             />
             <el-button
                 class="m-t-middle"
-                type="primary"
                 :disabled="inputState.password === '' || inputState.name === ''"
                 @click="onSubmit"
             >送信</el-button>

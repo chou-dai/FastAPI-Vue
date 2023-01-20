@@ -3,19 +3,16 @@ import { Vue } from "vue-class-component";
 import { ref } from "vue";
 
 export default class Header extends Vue {
-    public activeIndex = ref(location.pathname === "/" ? "home" : "mypage")
+    public currentPath = ref(location.pathname === "/" ? "home" : "mypage")
 }
 </script>
 
 <template>
-    <div style="display:flex">
+    <div class="navigation">
         <div>logo</div>
         <el-menu
-            :default-active="activeIndex"
-            background-color="#694F94"
-            text-color="#fff"
-            active-text-color="#fff"
             mode="horizontal"
+            :default-active="currentPath"
             :ellipsis="false"
         >
             <el-menu-item index="home">

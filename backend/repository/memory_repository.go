@@ -17,7 +17,8 @@ func GetPublicMemories() []model.MemoryWithUserName {
 			LEFT JOIN users
 				ON memories.user_id = users.id
 			WHERE is_public = true
-			ORDER BY memories.created_at DESC`)
+			ORDER BY memories.created_at DESC
+			LIMIT 100`)
 	if err != nil {
 		panic(err.Error())
 	}

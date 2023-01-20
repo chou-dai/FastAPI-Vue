@@ -1,16 +1,9 @@
 a {
     text-decoration: none;
-    color: white;
 }
-.accent-color {
-    background-color: var(--el-color-primary);
-    color: white;
-}
-.accent-color-10 {
-    background-color: rgba(105, 79, 148, 0.1);
-}
-.accent-color-10 {
-    background-color: rgba(105, 79, 148, 0.2);
+h1, h2, h4, p, span {
+    padding: 0;
+    margin: 0;
 }
 
 .text-center {
@@ -22,6 +15,9 @@ a {
 .m-t-middle {
     margin-top: 20px;
 }
+.flex {
+    display: flex;
+}
 
 header {
     position: fixed;
@@ -31,12 +27,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 40px;
     height: 60px;
     z-index: 10;
 }
 .navigation {
     display: flex;
+    align-items: center;
+    column-gap: 20px;
 }
 .nav-link {
     padding: 0 20px;
@@ -56,6 +54,13 @@ main {
     margin: 0 auto;
     padding: 10px 0 60px;
 }
+
+.page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .modal-outer {
     position: fixed;
     top: 0;
@@ -125,10 +130,22 @@ main {
 }
 .list-item-content {
     display: flex;
+    column-gap: 18px;
 }
-.list-item-button {
-    width: 100px;
+.item-title-tag {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    column-gap: 8px;
+}
+
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.count-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }

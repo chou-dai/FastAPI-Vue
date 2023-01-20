@@ -5,3 +5,4 @@ export {default as PublicMemoryListItem} from "./PublicMemoryListItem.vue";
 export {default as Navigation} from "./Navigation.vue";
 export {default as UserModal} from "./UserModal.vue";
 export {default as TimeCount} from "./TimeCount.vue";
+export {default as BaseButton} from "./BaseButton.vue";
