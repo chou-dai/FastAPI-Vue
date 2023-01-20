@@ -50,13 +50,12 @@ export default class MyPage extends Vue {
         await memoryApi.apiAuthMemoriesPost(this.inputState)
             .then(() => {
                 this.successMessage();
+                location.reload();
             })
             .catch((err) => {
                 if(err.response.status == 401) authErrorMessage();
                 else serverErrorMessage();
             });
-        await this.myMemoriesStore.fetchMyMemories();
-        await this.publicMemoriesStore.fetchPublicMemories();
     }
     // メモリー更新APIをPUT
     public async submitUpdateMemory() {
@@ -93,7 +92,7 @@ export default class MyPage extends Vue {
 <template>
     <div class="container">
         <div v-if="isAuthStore.isAuth">
-            <!-- <h1>My記録</h1> -->
+            <h1>My記録</h1>
             <el-button type="primary" @click="openCreateModal">新規作成</el-button>
             <div v-if="myMemoriesStore.memories.length > 0" class="memories-list">
                 <div class="list-item glass"

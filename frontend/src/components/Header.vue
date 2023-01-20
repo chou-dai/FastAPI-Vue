@@ -121,6 +121,8 @@ export default class Header extends Vue {
                 v-if="isAuthStore.isAuth"
                 type="primary"
                 @click="openUpdateUserNameModal"
+                color="#694F94"
+                plain
             >ユーザー名変更</el-button>
             <el-button
                 v-if="isAuthStore.isAuth"
