@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "codegen": "openapi-generator generate -g typescript-axios -i ../backend/swagger.yml -o ./src/client/"
+    "codegen": "openapi-generator generate -g typescript-axios -i ../backend/openapi.yml -o ./src/client/"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
