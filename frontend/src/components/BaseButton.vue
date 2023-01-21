@@ -10,7 +10,7 @@ import { Options, Vue } from "vue-class-component";
 })
 export default class BaseButton extends Vue {
     public title!: string;
-    public size!: string;
+    public size: string = "default";
     public onClick!: () => void;
 }
 </script>
