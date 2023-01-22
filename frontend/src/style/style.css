@@ -302,6 +302,9 @@ main {
     max-height: calc(100vh - 300px);
     overflow-y: scroll;
 }
+.timeline-memories::-webkit-scrollbar{
+    display: none;
+}
 .my-page-title {
     margin-bottom: 8px;
 }
