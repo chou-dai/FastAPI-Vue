@@ -39,12 +39,14 @@ export default class TimeCount extends Vue {
 </script>
 
 <template>
-    <h3 class="count-timer">
-        <div v-if="createDisplayDays(diff)">
-            {{ createDisplayDays(diff) }}
-        </div>
-        <div>
-            {{ createDisplayTime(diff) }}
-        </div>
-    </h3>
+    <div class="time-counter">
+        <h3 class="count-timer">
+            <div v-if="createDisplayDays(diff)">
+                {{ createDisplayDays(diff) }}
+            </div>
+            <div>
+                {{ createDisplayTime(diff) }}
+            </div>
+        </h3>
+    </div>
 </template>

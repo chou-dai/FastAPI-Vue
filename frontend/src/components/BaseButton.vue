@@ -17,12 +17,11 @@ export default class BaseButton extends Vue {
 
 
 <template>
-    <div>
-        <el-button
-            :size="size"
-            @click="onClick"
-        >
-            {{ title }}
-        </el-button>
-    </div>
+    <el-button
+        :size="size"
+        @click="onClick"
+        type="primary"
+    >
+        {{ title }}
+    </el-button>
 </template>

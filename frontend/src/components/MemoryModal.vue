@@ -47,20 +47,20 @@ export default class MemoryModal extends Vue {
                     type="textarea"
                 />
             </div>
-            <el-row class="m-y-small" justify="space-between">
+            <div class="m-y-small modal-is-public">
                 <span>タイムラインに公開</span>
                 <el-switch v-model="inputState.isPublic" />
-            </el-row>
-            <el-row class="m-t-middle" justify="space-between">
-                <BaseButton
-                    title="キャンセル"
-                    :onClick="onClose"
-                />
+            </div>
+            <div class="m-t-middle modal-button-wrapper">
+                <el-button
+                    @click="onClose"
+                >キャンセル</el-button>
                 <el-button
                     :disabled="inputState.title === ''"
                     @click="onSubmit"
+                    type="primary"
                 >保存</el-button>
-            </el-row>
+            </div>
         </div>
     </div>
 </template>

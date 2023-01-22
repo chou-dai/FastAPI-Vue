@@ -89,18 +89,22 @@ export default class MyPage extends Vue {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container my-page">
         <div v-if="isAuthStore.isAuth">
-            <div class="page-title">
-                <h1>My記録</h1>
+            <div class="title-button-wrapper">
+                <div class="title-wrapper">
+                    <h2 class="my-page-title">My記録</h2>
+                    <p>記録を作成した時点からカウントアップが始まります。</p>
+                </div>
                 <BaseButton
                     title="新規登録"
                     :onClick="openCreateModal"
                     size="large"
+                    class="new-memory-button"
                 />
             </div>
             <div v-if="myMemoriesStore.memories.length > 0" class="memories-list">
-                <div class="list-item glass"
+                <div class="list-item"
                     v-for="memory in myMemoriesStore.memories"
                     :key="memory.id"
                 >

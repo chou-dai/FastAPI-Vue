@@ -112,22 +112,25 @@ export default class Header extends Vue {
     <header>
         <Navigation />
         <div v-if="!isAuthStore.isAuth">
-            <BaseButton
+            <el-button
                 @click="openLoginModal"
-                title="ログイン"
-            />
-            <BaseButton
+                type="primary"
+                plain
+                class="header-button"
+            >ログイン</el-button>
+            <el-button
                 @click="openSignupModal"
-                title="サインアップ"
-            />
+                type="primary"
+                class="header-button"
+            >サインアップ</el-button>
         </div>
         <el-dropdown v-if="isAuthStore.isAuth" trigger="click">
-            <el-button circle size="large">
-                <el-icon><UserFilled /></el-icon>
+            <el-button circle size="large" class="header-icon-button">
+                <el-icon class="header-icon"><UserFilled /></el-icon>
             </el-button>
             <template #dropdown>
-                <el-dropdown-menu class="dropdown-menu">
-                    <div>{{ loginUserInfo.name }}</div>
+                <el-dropdown-menu class="dropdown-menu header-menu">
+                    <div class="header-user-name">{{ loginUserInfo.name }}</div>
                     <BaseButton
                         @click="openUpdateUserNameModal"
                         title="名前変更"
