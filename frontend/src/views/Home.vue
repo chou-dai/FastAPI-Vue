@@ -20,7 +20,9 @@ export default class Home extends Vue {
         <div class="app-title-wrapper">
             <h1 class="app-title">経過時間計測アプリ</h1>
             <p>あれからどれだけ経過したかをカウントアップするアプリケーションです。</p>
-            <p v-if="!isAuthStore.isAuth">ログインをしていただくとMy記録ページをご利用いただけます。</p>
+            <p v-if="!isAuthStore.isAuth" class="m-t-very-small">
+                ログインをしていただくとMy記録ページをご利用いただけます。
+            </p>
         </div>
         <div class="timeline-wrapper">
             <h2 class="timeline-title">タイムライン</h2>
