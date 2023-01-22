@@ -34,8 +34,11 @@ export default class MyMemoryListItem extends Vue {
     <div class="list-item-content">
         <TimeCount :createdAt="new Date(memory.createdAt.replace('Z',''))" />
         <div class="item-detail">
-            <div class="item-title-tag">
-                <h4>{{ memory.title }}</h4>
+            <div class="item-date-wrapper">
+                <div class="item-date">
+                    <el-icon><Timer /></el-icon>
+                    <span>{{ parseDateByCreatedAt(new Date(memory.createdAt.replace('Z',''))) }}</span>
+                </div>
                 <el-tag
                     v-if="memory.isPublic"
                     size="small"
@@ -43,11 +46,8 @@ export default class MyMemoryListItem extends Vue {
                     round
                 >公開中</el-tag>
             </div>
-            <div>{{ memory.description }}</div>
-            <div class="flex">
-                <el-icon><Timer /></el-icon>
-                <span>{{ parseDateByCreatedAt(new Date(memory.createdAt.replace('Z',''))) }}</span>
-            </div>
+            <h4 class="item-title">{{ memory.title }}</h4>
+            <div class="item-description">{{ memory.description }}</div>
         </div>
     </div>
     <el-dropdown trigger="click">
@@ -55,15 +55,15 @@ export default class MyMemoryListItem extends Vue {
             <el-icon><MoreFilled /></el-icon>
         </el-button>
         <template #dropdown>
-            <el-dropdown-menu>
+            <el-dropdown-menu class="dropdown-menu">
                 <BaseButton
                     title="編集"
                     :onClick="onClickEdit"
                 />
-                <BaseButton
-                    title="削除"
-                    :onClick="onClickDelete"
-                />
+                <el-button
+                    @click="onClickDelete"
+                    color="#dc3545"
+                >削除</el-button>
             </el-dropdown-menu>
         </template>
     </el-dropdown>

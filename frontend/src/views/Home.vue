@@ -17,19 +17,21 @@ export default class Home extends Vue {
 
 <template>
     <div class="container">
-        <div>
-            <h1>記録カウントアップタイマー</h1>
+        <div class="app-title-wrapper">
+            <h1 class="app-title">経過時間計測アプリ</h1>
             <p>あれからどれだけ経過したかをカウントアップするアプリケーションです。</p>
             <p v-if="!isAuthStore.isAuth">ログインをしていただくとMy記録ページをご利用いただけます。</p>
         </div>
-        <h2>タイムライン</h2>
-        <el-scrollbar height="400px" class="memories-list">
-            <div class="list-item"
-                v-for="memory in publicMemoriesStore.memories"
-                :key="memory.id"
-            >
-                <PublicMemoryListItem :memory="memory"/>
-            </div>
-        </el-scrollbar>
+        <div class="timeline-wrapper">
+            <h2 class="timeline-title">タイムライン</h2>
+            <el-scrollbar class="memories-list timeline-memories">
+                <div class="list-item"
+                    v-for="memory in publicMemoriesStore.memories"
+                    :key="memory.id"
+                >
+                    <PublicMemoryListItem :memory="memory"/>
+                </div>
+            </el-scrollbar>
+        </div>
     </div>
 </template>

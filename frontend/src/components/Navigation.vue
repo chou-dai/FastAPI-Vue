@@ -9,11 +9,16 @@ export default class Header extends Vue {
 
 <template>
     <div class="navigation">
-        <div>logo</div>
+        <div class="header-logo">
+            <img :src="require('../assets/logo.png')" alt="logo" />
+        </div>
         <el-menu
             mode="horizontal"
             :default-active="currentPath"
             :ellipsis="false"
+            background-color="var(--main-bg-color)"
+            text-color="var(--main-text-color)"
+            active-text-color="var(--main-text-color)"
         >
             <el-menu-item index="home">
                 <router-link to="/" class="nav-link">ホーム</router-link>

@@ -1,3 +1,8 @@
+:root {
+    --main-bg-color: #004595;
+    --main-text-color: white;
+    --warn-color: #dc3545;
+}
 a {
     text-decoration: none;
 }
@@ -5,7 +10,9 @@ h1, h2, h4, p, span {
     padding: 0;
     margin: 0;
 }
-
+:hover {
+    transition: all 0.2s;
+}
 .text-center {
     text-align: center;
 }
@@ -19,6 +26,7 @@ h1, h2, h4, p, span {
     display: flex;
 }
 
+/* ヘッダー */
 header {
     position: fixed;
     width: 100%;
@@ -29,9 +37,12 @@ header {
     align-items: center;
     padding: 0 40px;
     height: 60px;
-    z-index: 10;
+    z-index: 9000;
+    filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .5));
+    background: var(--main-bg-color);
 }
 .navigation {
+    position: relative;
     display: flex;
     align-items: center;
     column-gap: 20px;
@@ -39,28 +50,49 @@ header {
 .nav-link {
     padding: 0 20px;
 }
-
-main {
-    margin-top: 60px;
-    width: 100%;
-    min-height: calc(100vh - 60px);
+.header-icon-button,
+.header-icon-button:hover,
+.header-icon-button:focus {
+    border-color: whitesmoke;
+    background: var(--main-bg-color);
+    color: var(--main-text-color);
 }
-
-.container {
+.header-icon-button:hover {
+    color: rgba(255, 255, 255, .7);
+}
+.header-logo {
     position: relative;
-    width: 80%;
-    max-width: 800px;
+    height: 46px;
+    width: 46px;
+}
+.header-logo img {
+    position: absolute;
     height: 100%;
-    margin: 0 auto;
-    padding: 10px 0 60px;
+    width: 100%;
+    object-fit: contain;
+}
+.header-icon {
+    font-size: 18px;
+}
+.header-menu.dropdown-menu {
+    min-width: 160px;
+}
+.header-user-name {
+    font-size: 1.3em;
+    margin: 5px 0;
+}
+.header-button {
+    width: 120px;
+    margin-right: 10px;
+}
+.el-menu--horizontal
+.el-menu-item:not(.is-disabled):focus,
+.el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
+    background: var(--main-bg-color);
+    opacity: 0.7;
 }
 
-.page-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
+/* モーダル */
 .modal-outer {
     position: fixed;
     top: 0;
@@ -91,36 +123,41 @@ main {
     left: 0;
     top: 0;
 }
-
-.el-menu--horizontal {
-    border-bottom: 0;
+.modal-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 5px;
 }
-.el-menu-item {
-    padding: 0;
+.modal-button-wrapper button {
+    width: 50%;
 }
-
-.error-message {
-    color: #dc3545;
-    font-size: small;
-}
-.required {
-    color: #dc3545;
-    margin-left: 5px;
+.modal-is-public {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    align-items: center;
 }
 
+/* メモリーリスト */
 .memories-list {
     padding: 0;
     margin: 0;
-    overflow: hidden;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, .5));
+    width: calc(100% + 10px);
+    margin-left: -10px;
 }
 .list-item {
     min-height: 100px;
+    margin-bottom: 2px;
     list-style: none;
-    padding: 10px 20px;
-    border: 1px solid gray;
+    padding: 14px 20px 14px 0;
+    border: 1px solid gainsboro;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: white;
+    margin-left: 10px;
+    column-gap: 10px;
 }
 .list-item:nth-child(even) {
     background: whitesmoke;
@@ -130,22 +167,157 @@ main {
 }
 .list-item-content {
     display: flex;
-    column-gap: 18px;
+    column-gap: 16px;
+    align-items: center;
 }
-.item-title-tag {
+.item-title {
+    font-size: 1.2em;
+    margin-top: 6px;
+}
+.item-description {
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+.item-date-wrapper {
     display: flex;
     align-items: center;
-    column-gap: 8px;
+    column-gap: 10px;
 }
-
-.dropdown-menu {
+.item-tag {
+    font-size: 0.7em;
+}
+.item-date, .item-user {
     display: flex;
-    flex-direction: column;
+    font-size: small;
+    color: rgba(0, 0, 0, 0.6);
 }
-
+.item-user {
+    margin-top: 4px;
+}
+.time-counter {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, .5));
+    min-height: 83px;
+}
+.time-counter::before {
+    content: "";
+    position: absolute;
+    height: calc(100% + 8px);
+    width: calc(100% + 10px);
+    top: -4px;
+    left: -10px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 50%, 100% 100%, 0 100%);
+    background-color: var(--main-bg-color);
+}
+.time-counter::after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: 10px;
+    top: calc(100% + 4px);
+    left: -10px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    background-color: #011c3b;
+}
 .count-timer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: var(--main-text-color);
+    z-index: 1;
+    padding: 0 25px 0 5px;
+}
+
+/* ドロップダウンメニュー */
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 4px;
+}
+.dropdown-menu button {
+    min-width: 80px;
+    width: 100%;
+}
+.el-button+.el-button {
+    margin: 1px 0 0 0;
+}
+
+/* レイアウト */
+main {
+    margin-top: 60px;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+}
+.container {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 0 60px;
+}
+
+/* ページ */
+.page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.app-title-wrapper {
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 26px;
+}
+.app-title-wrapper::before {
+    position: absolute;
+    content: "";
+    width: 200px;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: black;
+}
+.app-title {
+    margin-bottom: 8px;
+}
+.title-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.timeline-title {
+    margin-bottom: 8px;
+}
+.timeline-memories {
+    max-height: calc(100vh - 300px);
+    overflow-y: scroll;
+}
+.my-page-title {
+    margin-bottom: 8px;
+}
+.new-memory-button {
+    padding: 12px 25px;
+}
+
+/* utile */
+.el-menu--horizontal {
+    border-bottom: 0;
+}
+.el-menu-item {
+    padding: 0;
+}
+.error-message {
+    color: var(--warn-color);
+    font-size: small;
+}
+.required {
+    color: var(--warn-color);
+    margin-left: 5px;
 }
