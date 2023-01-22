@@ -9,6 +9,7 @@ import { useIsAuthStore } from '@/store/isAuthStore';
 import { ElMessage } from 'element-plus';
 import { authErrorMessage, serverErrorMessage } from '../util/errorHandler';
 import { memoriesFetchApi } from '@/util/fetchApiWrapper';
+import { useIsLoadingStore } from '@/store/isLoadingStore';
 
 @Options({
     components: {
@@ -21,6 +22,7 @@ export default class MyPage extends Vue {
     public myMemoriesStore = useMyMemoriesStore();
     public openModalStore = useOpenModalStore();
     public isAuthStore = useIsAuthStore();
+    public isLoadingStore = useIsLoadingStore();
     private initialState: MemoryRequest = {
         title: "",
         description: "",
@@ -131,7 +133,7 @@ export default class MyPage extends Vue {
             />
         </div>
         <el-empty
-            v-if="!isAuthStore.isAuth"
+            v-if="!isAuthStore.isAuth && !isLoadingStore.isLoading"
             :image-size="300"
             description="こちらのページをご利用いただくためにはログインが必要です。"
         />

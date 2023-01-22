@@ -11,6 +11,7 @@ import { UserFilled } from '@element-plus/icons-vue';
 import UserModal from "./UserModal.vue";
 import Navigation from "./Navigation.vue";
 import BaseButton from "./BaseButton.vue";
+import { useIsLoadingStore } from "@/store/isLoadingStore";
 
 @Options({
     components: {
@@ -24,6 +25,7 @@ export default class Header extends Vue {
     public openModalStore = useOpenModalStore();
     public isAuthStore = useIsAuthStore();
     public isInputError = false;
+    public isLoadingStore = useIsLoadingStore();
     private initialState: UserRequest = {
         name: "",
         password: ""
@@ -111,7 +113,7 @@ export default class Header extends Vue {
 <template>
     <header>
         <Navigation />
-        <div v-if="!isAuthStore.isAuth">
+        <div v-if="!isAuthStore.isAuth && !isLoadingStore.isLoading">
             <el-button
                 @click="openLoginModal"
                 type="primary"
