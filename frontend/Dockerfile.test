@@ -5,9 +5,7 @@ COPY package.json .
 RUN npm install 
 COPY . .
 RUN apk update && \
-    npm install -g npm && \
-    npm install -g @vue/cli && \
-    npm run build
+    npm install -g npm
 
 # テスト環境
 FROM nginx:1.17.4-alpine as TEST-STAGE

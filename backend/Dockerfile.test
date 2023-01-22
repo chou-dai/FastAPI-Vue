@@ -3,6 +3,6 @@ FROM golang:1.19-alpine
 WORKDIR /backend
 COPY . .
 
-RUN go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@v4.15.2
+# RUN go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@v4.15.2
 
 CMD ["go", "run", "main.go"]
