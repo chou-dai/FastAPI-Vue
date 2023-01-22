@@ -4,7 +4,10 @@ WORKDIR /frontend
 COPY package.json .
 RUN npm install 
 COPY . .
-RUN npm run build
+RUN apk update && \
+    npm install -g npm && \
+    npm install -g @vue/cli && \
+    npm run build
 
 # テスト環境
 FROM nginx:1.17.4-alpine as TEST-STAGE
