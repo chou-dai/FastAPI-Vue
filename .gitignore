@@ -2,3 +2,5 @@
 backend/tmp
 db/volume/*
 migrate_cmd.txt
+.DS_Store
+architecture.drawio
