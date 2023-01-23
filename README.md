@@ -1,7 +1,8 @@
 # Memory CountUp Timer Application
 
 ## 概要
-
+あれからどれだけの時間が経過したかを記録するアプリケーション<br>
+http://count-up-timer.com/
 
 ## 技術スタック
 | 分野 | 使用技術 |
