@@ -338,3 +338,46 @@ main {
     z-index: 20000;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
+
+
+@media screen and (max-width:768px) {
+
+    header {
+        padding: 3%;
+    }
+    .navigation {
+        column-gap: 10px;
+    }
+    .nav-link {
+        padding: 0 8px;
+    }
+
+    main {
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 1.6em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+
+    .container {
+        width: 92%;
+    }
+
+    .timeline-memories {
+        max-height: initial;
+    }
+    .item-title {
+        font-size: 1.1em;
+        margin-top: 4px;
+    }
+    .item-description {
+        margin-top: 3px;
+    }
+    .item-user {
+        margin-top: 3px;
+    }
+}
