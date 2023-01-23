@@ -3,6 +3,7 @@ import { Vue, Options } from 'vue-class-component';
 import { usePublicMemoriesStore } from '@/store/publicMemoriesStore';
 import { PublicMemoryListItem } from '@/components';
 import { useIsAuthStore } from '@/store/isAuthStore';
+import { useIsLoadingStore } from '@/store/isLoadingStore';
 
 @Options({
     components: {
@@ -12,6 +13,7 @@ import { useIsAuthStore } from '@/store/isAuthStore';
 export default class Home extends Vue {
     public publicMemoriesStore = usePublicMemoriesStore();
     public isAuthStore = useIsAuthStore();
+    public isLoading = useIsLoadingStore();
 }
 </script>
 
@@ -20,7 +22,7 @@ export default class Home extends Vue {
         <div class="app-title-wrapper">
             <h1 class="app-title">経過時間計測アプリ</h1>
             <p>あれからどれだけ経過したかをカウントアップするアプリケーションです。</p>
-            <p v-if="!isAuthStore.isAuth" class="m-t-very-small">
+            <p v-if="!isAuthStore.isAuth && !isLoading.isLoading" class="m-t-very-small">
                 ログインをしていただくとMy記録ページをご利用いただけます。
             </p>
         </div>

@@ -1,7 +1,7 @@
 # Memory CountUp Timer Application
 
 ## 概要
-あれからどれだけの時間が経過したかを記録するアプリケーション<br>
+あれからどれだけの時間が経過したかをカウントアップするアプリケーションです。<br>
 http://count-up-timer.com/
 
 ## 技術スタック
@@ -12,3 +12,5 @@ http://count-up-timer.com/
 | データベース | MySQL |
 | Webサーバー | Nginx(Reverse Proxy) |
 | その他 | Docker, SSL |
+
+## アーキテクチャ
