@@ -43,28 +43,29 @@ export default class MyMemoryListItem extends Vue {
                     v-if="memory.isPublic"
                     size="small"
                     effect="dark"
+                    class="item-public-tag"
                     round
                 >公開中</el-tag>
+                <el-dropdown trigger="click" class="item-menu-button">
+                    <el-button circle>
+                        <el-icon><MoreFilled /></el-icon>
+                    </el-button>
+                    <template #dropdown>
+                        <el-dropdown-menu class="dropdown-menu">
+                            <BaseButton
+                                title="編集"
+                                :onClick="onClickEdit"
+                            />
+                            <el-button
+                                @click="onClickDelete"
+                                color="#dc3545"
+                            >削除</el-button>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
             </div>
             <h4 class="item-title">{{ memory.title }}</h4>
             <div class="item-description">{{ memory.description }}</div>
         </div>
     </div>
-    <el-dropdown trigger="click">
-        <el-button circle>
-            <el-icon><MoreFilled /></el-icon>
-        </el-button>
-        <template #dropdown>
-            <el-dropdown-menu class="dropdown-menu">
-                <BaseButton
-                    title="編集"
-                    :onClick="onClickEdit"
-                />
-                <el-button
-                    @click="onClickDelete"
-                    color="#dc3545"
-                >削除</el-button>
-            </el-dropdown-menu>
-        </template>
-    </el-dropdown>
 </template>
