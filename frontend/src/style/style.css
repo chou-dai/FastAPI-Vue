@@ -170,7 +170,7 @@ header {
 .list-item-content {
     display: flex;
     column-gap: 16px;
-    align-items: center;
+    align-items: flex-start;
 }
 .item-title {
     font-size: 1.2em;
@@ -192,13 +192,11 @@ header {
     display: flex;
     font-size: small;
     color: rgba(0, 0, 0, 0.6);
-}
-.item-user {
     margin-top: 4px;
 }
 .time-counter {
     position: relative;
-    height: 100%;
+    height: fit-content;
     display: flex;
     align-items: center;
     filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, .5));
@@ -369,6 +367,17 @@ main {
     .timeline-memories {
         max-height: initial;
     }
+    .memories-list {
+        filter: none;
+    }
+    .list-item {
+        margin-bottom: 0;
+        padding: 14px 10px 14px 0;
+        column-gap: 6px;
+    }
+    .list-item-content {
+        column-gap: 12px;
+    }
     .item-title {
         font-size: 1.1em;
         margin-top: 4px;
@@ -378,5 +387,11 @@ main {
     }
     .item-user {
         margin-top: 3px;
+    }
+    .time-counter {
+        min-height: 73px;
+    }
+    .count-timer {
+        padding: 0 22px 0 2px;
     }
 }
