@@ -204,6 +204,9 @@ header {
     font-size: small;
     color: rgba(0, 0, 0, 0.6);
 }
+.item-user {
+    margin-top: 4px;
+}
 .time-counter {
     position: relative;
     height: fit-content;
