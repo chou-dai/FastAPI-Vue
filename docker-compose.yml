@@ -51,8 +51,19 @@ services:
     build:
       context: ./nginx
       dockerfile: ${DOCKERFILE}
+    volumes:
+      - ./nginx/cartbot/letsencrypt:/etc/letsencrypt
+      - ./nginx/cartbot/dist:/var/dist
     depends_on:
       - frontend
       - backend
     ports:
       - "80:80"
+
+  certbot:
+    container_name: certbot
+    image: certbot/certbot:v1.7.0
+    volumes:
+      - ./nginx/cartbot/letsencrypt:/etc/letsencrypt
+      - ./nginx/cartbot/dist:/dist
+    command: ["--version"]
