@@ -44,7 +44,7 @@ export default class UserModal extends Vue {
                 v-model="inputState.password"
                 placeholder="パスワード"
                 maxlength="30"
-                type="text"
+                type="url"
                 class="m-y-small"
             />
             <el-button
