@@ -79,6 +79,7 @@ header {
 }
 .header-menu.dropdown-menu {
     min-width: 160px;
+    z-index: 9001;
 }
 .header-user-name {
     font-size: 1.3em;
@@ -93,6 +94,9 @@ header {
 .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
     background: var(--main-bg-color);
     opacity: 0.7;
+}
+.el-popper:first-child {
+    z-index: 9001 !important;
 }
 
 /* モーダル */
@@ -341,6 +345,7 @@ main {
     z-index: 20000;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 .pc {
     display: block;
 }
@@ -383,6 +388,9 @@ main {
 
     .container {
         width: 92%;
+    }
+    .header-menu.dropdown-menu {
+        min-width: 100px;
     }
 
     .timeline-memories {
