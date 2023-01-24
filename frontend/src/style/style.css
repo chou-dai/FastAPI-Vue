@@ -341,11 +341,23 @@ main {
     z-index: 20000;
     background-color: rgba(0, 0, 0, 0.7);
 }
+.pc {
+    display: block;
+}
+.sp {
+    display: none;
+}
 
 
-
+/* レスポンシブ */
 @media screen and (max-width:768px) {
 
+    .pc {
+        display: none;
+    }
+    .sp {
+        display: block;
+    }
     header {
         padding: 3%;
     }
@@ -365,7 +377,7 @@ main {
     h2 {
         font-size: 1.3em;
     }
-    input {
+    input, textarea {
         font-size: 16px !important;
     }
 
@@ -389,6 +401,8 @@ main {
         height: 18px;
         margin-bottom: 3px;
         padding: 1px 6px;
+        display: flex;
+        align-items: center;
     }
     .list-item-content {
         column-gap: 12px;

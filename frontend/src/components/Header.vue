@@ -7,7 +7,7 @@ import { useIsAuthStore } from '@/store/isAuthStore';
 import { useLoginUserStore } from "@/store/loginUserStore";
 import { allFetchApi } from "../util/fetchApiWrapper";
 import { ElMessage } from 'element-plus';
-import { UserFilled } from '@element-plus/icons-vue';
+import { UserFilled, User } from '@element-plus/icons-vue';
 import UserModal from "./UserModal.vue";
 import Navigation from "./Navigation.vue";
 import BaseButton from "./BaseButton.vue";
@@ -18,7 +18,8 @@ import { useIsLoadingStore } from "@/store/isLoadingStore";
         UserModal,
         Navigation,
         BaseButton,
-        UserFilled
+        UserFilled,
+        User
     }
 })
 export default class Header extends Vue {
@@ -114,17 +115,36 @@ export default class Header extends Vue {
     <header>
         <Navigation />
         <div v-if="!isAuthStore.isAuth && !isLoadingStore.isLoading">
-            <el-button
-                @click="openLoginModal"
-                type="primary"
-                plain
-                class="header-button"
-            >ログイン</el-button>
-            <el-button
-                @click="openSignupModal"
-                type="primary"
-                class="header-button"
-            >サインアップ</el-button>
+            <div class="pc">
+                <el-button
+                    @click="openLoginModal"
+                    type="primary"
+                    plain
+                    class="header-button"
+                >ログイン</el-button>
+                <el-button
+                    @click="openSignupModal"
+                    type="primary"
+                    class="header-button"
+                >サインアップ</el-button>
+            </div>
+            <el-dropdown class="sp" trigger="click">
+                <el-button circle size="large" class="header-icon-button">
+                    <el-icon class="header-icon"><User /></el-icon>
+                </el-button>
+                <template #dropdown>
+                    <el-dropdown-menu class="dropdown-menu header-menu">
+                        <BaseButton
+                            @click="openLoginModal"
+                            title="ログイン"
+                        />
+                        <BaseButton
+                            @click="openSignupModal"
+                            title="サインアップ"
+                        />
+                    </el-dropdown-menu>
+                </template>
+            </el-dropdown>
         </div>
         <el-dropdown v-if="isAuthStore.isAuth" trigger="click">
             <el-button circle size="large" class="header-icon-button">
