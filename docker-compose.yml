@@ -59,6 +59,7 @@ services:
       - backend
     ports:
       - "80:80"
+      - "443:443"
 
   certbot:
     container_name: certbot
