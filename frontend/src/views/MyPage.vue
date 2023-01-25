@@ -134,7 +134,7 @@ export default class MyPage extends Vue {
         </div>
         <el-empty
             v-if="!isAuthStore.isAuth && !isLoadingStore.isLoading"
-            :image-size="300"
+            class="required-login"
             description="こちらのページをご利用いただくためにはログインが必要です。"
         />
     </div>

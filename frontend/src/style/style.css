@@ -348,6 +348,9 @@ main {
     z-index: 20000;
     background-color: rgba(0, 0, 0, 0.7);
 }
+.required-login .el-empty__image {
+    width: 300px;
+}
 
 .pc {
     display: block;
@@ -449,5 +452,12 @@ main {
 
     .title-button-wrapper {
         align-items: flex-end;
+    }
+
+    .required-login {
+        padding-top: 10px;
+    }
+    .required-login .el-empty__image {
+        width: 260px;
     }
 }
