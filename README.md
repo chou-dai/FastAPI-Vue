@@ -17,7 +17,7 @@ https://count-up-timer.com/
 | フロントエンド | Vue(TypeScript), Vue Router, Pinia(Global Store), Element-Plus(UI Library) |
 | バックエンド | Gin(Go), Air(Hot Reload), golang-migrate |
 | データベース | MySQL |
-| その他 | Docker, SSL |
+| その他 | Docker, SSL, Let's Encrypt |
 
 ## アーキテクチャ
 ![architecture](https://user-images.githubusercontent.com/89395132/214514429-b03197b6-1bbc-4f54-b6eb-2912d943e1bd.png)
