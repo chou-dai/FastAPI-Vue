@@ -62,10 +62,12 @@ func GetMyMemories(userId int) []model.Memory {
 func CreateMemory(memory model.Memory) {
 	dbConnect()
 	defer db.Close()
+	var layout = "2006-01-02 15:04:05"
+	dateTime := memory.CreatedAt.Format(layout)
 
 	insert, err := db.Query(
-		"INSERT INTO memories(title, description, is_public, user_id) VALUES (?, ?, ?, ?)",
-		memory.Title, memory.Description, memory.IsPublic, memory.UserId)
+		"INSERT INTO memories(title, description, is_public, user_id, created_at) VALUES (?, ?, ?, ?, ?)",
+		memory.Title, memory.Description, memory.IsPublic, memory.UserId, dateTime)
 	if err != nil {
 		panic(err.Error())
 	}

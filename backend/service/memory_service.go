@@ -3,6 +3,7 @@ package service
 import (
 	"gin_backend/model"
 	"gin_backend/repository"
+	"time"
 )
 
 func GetPublicMemories() model.PublicMemoryResponse {
@@ -16,6 +17,10 @@ func GetMyMemories(userId int) model.MyMemoryResponse {
 }
 
 func CreateMemory(memory model.Memory) {
+	now := time.Now()
+	jst := time.FixedZone("Asia/Tokyo", 9*60*60)
+	nowJST := now.In(jst)
+	memory.CreatedAt = nowJST
 	repository.CreateMemory(memory)
 }
 
