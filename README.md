@@ -1,8 +1,7 @@
 # Memory CountUp Timer Application
 
 ## 概要
-あれからどれだけの時間が経過したかをカウントアップするアプリケーションです。<br>
-https://count-up-timer.com/
+あれからどれだけの時間が経過したかをカウントアップするアプリケーションです
 
 <table>
   <tr>
