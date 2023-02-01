@@ -2,7 +2,7 @@
 
 ## 概要
 あれからどれだけの時間が経過したかをカウントアップするアプリケーション<br>
-https://count-up-timer.com/mypage
+https://count-up-timer.com/
 
 <table>
   <tr>
