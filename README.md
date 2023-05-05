@@ -2,7 +2,6 @@
 
 ## 概要
 あれからどれだけの時間が経過したかをカウントアップするアプリケーション<br>
-https://count-up-timer.com
 
 <div align="left">
     <img height="340px" src="https://user-images.githubusercontent.com/89395132/214588559-ba0fdc15-fd5b-4999-89d2-308b69b2a953.png">
